@@ -5,7 +5,7 @@ shared_examples 'not authorized' do
     expect(json['errors']).to eq('Nil JSON web token')
   end
 
-  it 'returns status code 401' do
+  it 'returns unauthorized status' do
     expect(response).to have_http_status(:unauthorized)
   end
 end

@@ -1,7 +1,7 @@
 require 'rails_helper'
-require 'controllers/shared_examples/not_authorized_spec'
+require 'requests/shared_examples/not_authorized_spec'
 
-RSpec.describe UsersController, type: :request do
+RSpec.describe 'Users', type: :request do
   describe 'GET /users' do
     subject(:get_users_request) { get '/users', headers: }
 
@@ -18,7 +18,7 @@ RSpec.describe UsersController, type: :request do
         expect(json.size).to eq(users.size)
       end
 
-      it 'returns status code 200' do
+      it 'returns ok status' do
         expect(response).to have_http_status(:ok)
       end
     end
