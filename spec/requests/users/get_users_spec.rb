@@ -5,7 +5,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET /users' do
     subject(:get_users_request) { get '/users', headers: }
 
-    let(:users) { create_list(:user, 10) }
+    let(:users) { create_list :user, 10 }
 
     before do
       get_users_request

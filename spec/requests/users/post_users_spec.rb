@@ -13,7 +13,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with valid parameters' do
-      let(:user) { build(:user) }
+      let(:user) { build :user }
 
       it 'returns username' do
         expect(json['username']).to eq(user.username)
@@ -29,11 +29,11 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:user) { build(:user, **attrs) }
+      let(:user) { build :user, **attrs }
 
       it_behaves_like 'with errors' do
         let(:attrs) { { username: nil } }
-        let(:errors) { ['Username can\'t be blank'] }
+        let(:errors) { ['Username can\'t be blank', 'Username is invalid'] }
       end
 
       it_behaves_like 'with errors' do
