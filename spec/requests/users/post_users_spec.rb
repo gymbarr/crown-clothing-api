@@ -4,8 +4,7 @@ require 'requests/shared_examples/invalid_params_spec'
 RSpec.describe 'Users', type: :request do
   describe 'POST /users' do
     subject(:post_users_request) do
-      post '/users',
-           params: { username: user.username, email: user.email, password: user.password }
+      post '/users', params:
     end
 
     before do
@@ -13,14 +12,14 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with valid parameters' do
-      let(:user) { build :user }
+      let(:params) { attributes_for :user }
 
       it 'returns username' do
-        expect(json['username']).to eq(user.username)
+        expect(json['username']).to eq(params[:username])
       end
 
       it 'returns email' do
-        expect(json['email']).to eq(user.email)
+        expect(json['email']).to eq(params[:email])
       end
 
       it 'returns created status' do
@@ -29,7 +28,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:user) { build :user, **attrs }
+      let(:params) { attributes_for :user, **attrs }
 
       it_behaves_like 'with errors' do
         let(:attrs) { { username: nil } }
