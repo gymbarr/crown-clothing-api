@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'when authorized user' do
-      let(:headers) { { 'Authorization' => user_token(users.first) } }
+      let(:headers) { user_auth_header(users.first) }
 
       it 'returns all users' do
         expect(json.size).to eq(users.size)

@@ -3,7 +3,7 @@ require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'DELETE /users/:_username' do
+  describe 'DELETE /users/:username' do
     subject(:delete_user_request) do
       delete "/users/#{user.username}", headers:
     end
@@ -15,7 +15,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'when authorized user' do
-      let(:headers) { { 'Authorization' => user_token(user) } }
+      let(:headers) { user_auth_header(user) }
 
       it 'decrement the count of users by 1' do
         expect(User.all.count).to eq(0)

@@ -3,7 +3,7 @@ module ApiHelpers
     JSON.parse(response.body)
   end
 
-  def user_token(user)
-    Authorization::JsonWebTokenEncoder.call(user_id: user.id)
+  def user_auth_header(user)
+    { 'Authorization' => Authorization::JsonWebTokenEncoder.call(user_id: user.id) }
   end
 end

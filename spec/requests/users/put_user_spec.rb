@@ -3,7 +3,7 @@ require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'PUT /users/:_username' do
+  describe 'PUT /users/:username' do
     subject(:put_user_request) do
       put "/users/#{user.username}",
           params: new_params,
@@ -18,7 +18,7 @@ RSpec.describe 'Users', type: :request do
 
     context 'with valid parameters' do
       let(:new_params) { attributes_for :user }
-      let(:headers) { { 'Authorization' => user_token(user) } }
+      let(:headers) { user_auth_header(user) }
 
       it 'changes the user username' do
         expect(user.reload.username).to eq(new_params[:username])
@@ -32,14 +32,14 @@ RSpec.describe 'Users', type: :request do
         expect(user.reload.authenticate(new_params[:password])).to eq(user)
       end
 
-      it 'returns no content' do
-        expect(response).to have_http_status(:no_content)
+      it 'returns ok status' do
+        expect(response).to have_http_status(:ok)
       end
     end
 
     context 'with invalid parameters' do
       let(:new_params) { attributes_for :user, **attrs }
-      let(:headers) { { 'Authorization' => user_token(user) } }
+      let(:headers) { user_auth_header(user) }
 
       it_behaves_like 'with errors' do
         let(:attrs) { { username: nil } }
