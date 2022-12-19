@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do

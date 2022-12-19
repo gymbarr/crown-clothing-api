@@ -33,16 +33,19 @@ RSpec.describe 'Users', type: :request do
       it_behaves_like 'with errors' do
         let(:attrs) { { username: nil } }
         let(:errors) { ['Username can\'t be blank', 'Username is invalid'] }
+        let(:status) { :unprocessable_entity }
       end
 
       it_behaves_like 'with errors' do
         let(:attrs) { { email: nil } }
         let(:errors) { ['Email can\'t be blank', 'Email is invalid'] }
+        let(:status) { :unprocessable_entity }
       end
 
       it_behaves_like 'with errors' do
         let(:attrs) { { password: nil } }
         let(:errors) { ['Password can\'t be blank', 'Password is too short (minimum is 6 characters)'] }
+        let(:status) { :unprocessable_entity }
       end
     end
   end
