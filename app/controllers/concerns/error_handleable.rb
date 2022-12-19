@@ -1,4 +1,4 @@
-module ErrorHandling
+module ErrorHandleable
   extend ActiveSupport::Concern
 
   included do

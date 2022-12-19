@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::API
-  include ErrorHandling
-  include Authorization
+  include ErrorHandleable
+  include Authorizable
 end

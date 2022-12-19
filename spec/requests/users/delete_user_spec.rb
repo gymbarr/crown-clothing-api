@@ -18,7 +18,7 @@ RSpec.describe 'Users', type: :request do
       let(:headers) { user_auth_header(user) }
 
       it 'decrement the count of users by 1' do
-        expect(User.all.count).to eq(0)
+        expect(User.count).to eq(0)
       end
 
       it 'returns no content' do
