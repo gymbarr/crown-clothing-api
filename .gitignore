@@ -30,3 +30,4 @@
 
 # Local project files.
 .env
+.vscode
