@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'requests/shared_examples/invalid_params_spec'
 
 RSpec.describe 'Authentication', type: :request do
-  describe 'POST /auth/login' do
+  describe 'POST /api/auth/login' do
     subject(:post_auth_login_request) do
-      post '/auth/login', params:
+      post '/api/auth/login', params:
     end
 
     let(:user) { create :user }

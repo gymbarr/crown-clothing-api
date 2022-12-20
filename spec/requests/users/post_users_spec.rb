@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'requests/shared_examples/invalid_params_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'POST /users' do
+  describe 'POST /api/users' do
     subject(:post_users_request) do
-      post '/users', params:
+      post '/api/users', params:
     end
 
     before do

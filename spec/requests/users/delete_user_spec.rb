@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'DELETE /users/:username' do
+  describe 'DELETE /api/users/:username' do
     subject(:delete_user_request) do
-      delete "/users/#{user.username}", headers:
+      delete "/api/users/#{user.username}", headers:
     end
 
     let(:user) { create :user }

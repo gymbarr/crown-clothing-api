@@ -3,9 +3,9 @@ require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'PUT /users/:username' do
+  describe 'PUT /api/users/:username' do
     subject(:put_user_request) do
-      put "/users/#{user.username}",
+      put "/api/users/#{user.username}",
           params: new_params,
           headers:
     end

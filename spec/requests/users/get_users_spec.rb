@@ -2,8 +2,8 @@ require 'rails_helper'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Users', type: :request do
-  describe 'GET /users' do
-    subject(:get_users_request) { get '/users', headers: }
+  describe 'GET /api/users' do
+    subject(:get_users_request) { get '/api/users', headers: }
 
     let(:users) { create_list :user, 10 }
 
