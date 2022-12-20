@@ -8,15 +8,21 @@ RSpec.describe 'Authentication', type: :request do
     end
 
     let(:user) { create :user }
+    let(:token) { 'token' }
+    let(:service) { Authorization::JsonWebTokenEncoder }
 
     before do
+      allow(service).to receive(:call).and_return(token)
       post_auth_login_request
     end
 
     context 'with valid parameters' do
       let(:params) { { email: user.email, password: user.password } }
-      let(:token) { Authorization::JsonWebTokenEncoder.call(user_id: user.id) }
       let(:exp_regex) { /\d\d-\d\d-\d\d\d\d \d\d:\d\d/ }
+
+      it 'calls the service' do
+        expect(service).to have_received(:call).with(user_id: user.id)
+      end
 
       it 'returns a token' do
         expect(json['token']).to eq(token)
