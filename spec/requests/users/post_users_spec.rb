@@ -7,19 +7,27 @@ RSpec.describe 'Users', type: :request do
       post '/api/users', params:
     end
 
+    let(:token) { 'token' }
+    let(:service) { Authorization::JsonWebTokenEncoder }
+
     before do
+      allow(service).to receive(:call).and_return(token)
       post_users_request
     end
 
     context 'with valid parameters' do
       let(:params) { attributes_for :user }
 
-      it 'returns username' do
-        expect(json['username']).to eq(params[:username])
+      it 'calls the service' do
+        expect(service).to have_received(:call)
       end
 
-      it 'returns email' do
-        expect(json['email']).to eq(params[:email])
+      it 'returns a token' do
+        expect(json['token']).to eq(token)
+      end
+
+      it 'returns username' do
+        expect(json['username']).to eq(params[:username])
       end
 
       it 'returns created status' do

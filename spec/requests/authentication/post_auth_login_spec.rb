@@ -18,7 +18,6 @@ RSpec.describe 'Authentication', type: :request do
 
     context 'with valid parameters' do
       let(:params) { { email: user.email, password: user.password } }
-      let(:exp_regex) { /\d\d-\d\d-\d\d\d\d \d\d:\d\d/ }
 
       it 'calls the service' do
         expect(service).to have_received(:call).with(user_id: user.id)
@@ -26,10 +25,6 @@ RSpec.describe 'Authentication', type: :request do
 
       it 'returns a token' do
         expect(json['token']).to eq(token)
-      end
-
-      it 'returns expiration time' do
-        expect(json['exp']).to match(exp_regex)
       end
 
       it 'returns a username' do
