@@ -18,7 +18,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
-      render json: { token:, username: @user.username }, status: :created
+      response.headers['token'] = token
+
+      render json: @user, status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity

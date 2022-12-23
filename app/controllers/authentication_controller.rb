@@ -6,7 +6,9 @@ class AuthenticationController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
       token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
-      render json: { token:, username: @user.username }, status: :ok
+      response.headers['token'] = token
+
+      render json: @user, status: :ok
     else
       render json: { errors: ['Unauthorized'] }, status: :unauthorized
     end
