@@ -23,8 +23,16 @@ RSpec.describe 'Authentication', type: :request do
         expect(service).to have_received(:call).with(user_id: user.id)
       end
 
-      it 'returns a token' do
-        expect(json['token']).to eq(token)
+      it 'returns a token in headers' do
+        expect(response.headers['token']).to eq(token)
+      end
+
+      it 'returns a user id' do
+        expect(json['id']).to eq(user.id)
+      end
+
+      it 'returns an email' do
+        expect(json['email']).to eq(user.email)
       end
 
       it 'returns a username' do
