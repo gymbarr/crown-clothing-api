@@ -57,6 +57,7 @@ group :development do
 end
 
 group :test do
+  gem 'pundit-matchers', '~> 1.8.4'
   gem 'rspec-rails', '~> 6.0.1'
   gem 'rubocop-rspec', require: false
 end
