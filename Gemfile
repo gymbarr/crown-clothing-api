@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'pundit'
 gem 'rolify'
 
 group :development, :test do
