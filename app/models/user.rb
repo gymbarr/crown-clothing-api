@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   VALID_USERNAME_REGEX = /\A[a-z][a-z0-9_-]*\z/i
+  rolify
+
+  after_create :assign_default_role
 
   has_secure_password
   validates :email, presence: true, uniqueness: true
@@ -8,4 +11,10 @@ class User < ApplicationRecord
   validates :password,
             length: { minimum: 6 },
             if: -> { new_record? || !password.nil? }
+
+  validates :roles, presence: true, on: :update
+
+  def assign_default_role
+    add_role(Role.basic_user_role) if roles.blank?
+  end
 end
