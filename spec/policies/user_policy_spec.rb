@@ -1,5 +1,4 @@
 require 'rails_helper'
-# require 'policies/shared_examples/authentication_spec'
 
 RSpec.describe UserPolicy do
   subject { described_class.new(user, user_record) }
