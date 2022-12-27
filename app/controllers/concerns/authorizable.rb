@@ -5,6 +5,7 @@ module Authorizable
     include Pundit::Authorization
 
     before_action :authorize_request
+    after_action :verify_authorized
 
     def authorize_request
       header = request.headers['Authorization']
@@ -27,6 +28,10 @@ module Authorizable
 
     def user_not_authorized(exception)
       render json: { errors: exception.message }, status: :unauthorized
+    end
+
+    def pundit_user
+      @current_user
     end
   end
 end
