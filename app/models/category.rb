@@ -4,5 +4,5 @@ class Category < ApplicationRecord
 
   has_many :products, dependent: :destroy
 
-  validates :title, presence: true, uniqueness: true, length: { minimum: NAME_MIN_LENGTH, maximum: NAME_MAX_LENGTH }
+  validates :title, presence: true, uniqueness: true, length: { minimum: TITLE_MIN_LENGTH, maximum: TITLE_MAX_LENGTH }
 end
