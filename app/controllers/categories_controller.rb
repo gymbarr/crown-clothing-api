@@ -10,7 +10,8 @@ class CategoriesController < ApplicationController
 
   # GET /categories/{category}
   def show
-    render json: @category, status: :ok
+    @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
+    render json: @products, status: :ok
   end
 
   # POST /categories

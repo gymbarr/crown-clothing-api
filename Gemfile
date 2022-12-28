@@ -40,6 +40,7 @@ gem 'active_model_serializers'
 gem 'jwt'
 gem 'pundit'
 gem 'rolify'
+gem 'pagy', '~> 6.0'
 
 group :development, :test do
   gem 'database_cleaner'
