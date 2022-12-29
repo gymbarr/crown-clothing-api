@@ -1,4 +1,6 @@
 class ProductSerializer < ActiveModel::Serializer
   attributes :id, :title, :price, :category_id
-  attribute :image_url, key: :imageUrl
+  attribute :imageUrl do
+    object.image.url
+  end
 end
