@@ -1,9 +1,12 @@
 class CategoriesController < ApplicationController
   skip_before_action :authorize_request, except: %i[create update destroy]
   before_action :find_category, except: %i[create index]
+  before_action :authorize_category!, except: %i[create index]
 
   # GET /categories
   def index
+    authorize(Category)
+
     @categories = Category.all
     render json: @categories, status: :ok
   end
@@ -16,6 +19,8 @@ class CategoriesController < ApplicationController
 
   # POST /categories
   def create
+    authorize(Category)
+
     @category = Category.new(category_params)
     if @category.save
       render json: @category, status: :created
@@ -48,5 +53,9 @@ class CategoriesController < ApplicationController
 
   def category_params
     params.permit(:title)
+  end
+
+  def authorize_category!
+    authorize(@category)
   end
 end
