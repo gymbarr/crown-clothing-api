@@ -30,6 +30,12 @@ sneakers = Category.create(title: 'sneakers', image_url: 'https://i.ibb.co/0jqHp
 womens = Category.create(title: 'womens', image_url: 'https://i.ibb.co/GCCdy8t/womens.png')
 mens = Category.create(title: 'mens', image_url: 'https://i.ibb.co/R70vBrQ/men.png')
 
+hats.image.attach(io: Rails.root.join('app/assets/images/categories/hats.png').open, filename: 'hats.png', content_type: 'image/png')
+jackets.image.attach(io: Rails.root.join('app/assets/images/categories/jackets.png').open, filename: 'jackets.png', content_type: 'image/png')
+sneakers.image.attach(io: Rails.root.join('app/assets/images/categories/sneakers.png').open, filename: 'sneakers.png', content_type: 'image/png')
+womens.image.attach(io: Rails.root.join('app/assets/images/categories/womens.png').open, filename: 'womens.png', content_type: 'image/png')
+mens.image.attach(io: Rails.root.join('app/assets/images/categories/mens.png').open, filename: 'mens.png', content_type: 'image/png')
+
 Product.create(title: 'Brown Brim', image_url: 'https://i.ibb.co/ZYW3VTp/brown-brim.png', price: 25, category: hats)
 Product.create(title: 'Blue Beanie', image_url: 'https://i.ibb.co/ypkgK0X/blue-beanie.png', price: 18, category: hats)
 Product.create(title: 'Brown Cowboy', image_url: 'https://i.ibb.co/QdJwgmp/brown-cowboy.png', price: 35, category: hats)
