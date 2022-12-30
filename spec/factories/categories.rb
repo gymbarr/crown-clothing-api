@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    title { Faker::Hipster.unique.word }
+    title { Faker::Alphanumeric.unique.alpha(number: 15) }
   end
 end
