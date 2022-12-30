@@ -5,14 +5,16 @@ RSpec.describe 'Categories', type: :request do
     subject(:get_category_request) { get "/api/categories/#{category.title}" }
 
     let(:category) { create :category }
+    let(:products) { create_list :product, 3, category: category }
+    let!(:products_json) { JSON.parse(ActiveModelSerializers::SerializableResource.new(products).to_json) }
 
     before do
-      create_list :product, 3, category: category
       get_category_request
     end
 
-    it 'returns valid JSON' do
-      expect(json.length).to eq(3)
+    it 'returns a valid JSON' do
+      expect(json).to match_array(products_json)
+      expect(json.size).to eq(products.size)
     end
 
     it 'returns ok status' do

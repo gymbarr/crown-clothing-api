@@ -6,15 +6,17 @@ RSpec.describe 'Users', type: :request do
     subject(:get_users_request) { get '/api/users', headers: }
 
     before do
-      create_list :user, 4
       get_users_request
     end
 
     context 'when authorized user' do
       let(:user) { create :user, :with_admin_role }
+      let!(:users) { create_list :user, 4 }
       let(:headers) { user_auth_header(user) }
+      let!(:users_json) { JSON.parse(ActiveModelSerializers::SerializableResource.new(User.all).to_json) }
 
-      it 'returns all users' do
+      it 'returns a valid JSON' do
+        expect(json).to match_array(users_json)
         expect(json.size).to eq(User.count)
       end
 
