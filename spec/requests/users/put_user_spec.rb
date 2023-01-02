@@ -16,47 +16,49 @@ RSpec.describe 'Users', type: :request do
       put_user_request
     end
 
-    context 'with valid parameters' do
-      let(:new_params) { attributes_for :user }
+    context 'when authorized user' do
       let(:headers) { user_auth_header(user) }
 
-      it 'changes the user username' do
-        expect(user.reload.username).to eq(new_params[:username])
+      context 'with valid parameters' do
+        let(:new_params) { attributes_for :user }
+
+        it 'changes the user username' do
+          expect(user.reload.username).to eq(new_params[:username])
+        end
+
+        it 'changes the user email' do
+          expect(user.reload.email).to eq(new_params[:email])
+        end
+
+        it 'changes the user password' do
+          expect(user.reload.authenticate(new_params[:password])).to eq(user)
+        end
+
+        it 'returns ok status' do
+          expect(response).to have_http_status(:ok)
+        end
       end
 
-      it 'changes the user email' do
-        expect(user.reload.email).to eq(new_params[:email])
-      end
+      context 'with invalid parameters' do
+        let(:new_params) { attributes_for :user, **attrs }
 
-      it 'changes the user password' do
-        expect(user.reload.authenticate(new_params[:password])).to eq(user)
-      end
+        it_behaves_like 'with errors' do
+          let(:attrs) { { username: nil } }
+          let(:errors) { ['Username can\'t be blank', 'Username is invalid'] }
+          let(:status) { :unprocessable_entity }
+        end
 
-      it 'returns ok status' do
-        expect(response).to have_http_status(:ok)
-      end
-    end
+        it_behaves_like 'with errors' do
+          let(:attrs) { { email: nil } }
+          let(:errors) { ['Email can\'t be blank', 'Email is invalid'] }
+          let(:status) { :unprocessable_entity }
+        end
 
-    context 'with invalid parameters' do
-      let(:new_params) { attributes_for :user, **attrs }
-      let(:headers) { user_auth_header(user) }
-
-      it_behaves_like 'with errors' do
-        let(:attrs) { { username: nil } }
-        let(:errors) { ['Username can\'t be blank', 'Username is invalid'] }
-        let(:status) { :unprocessable_entity }
-      end
-
-      it_behaves_like 'with errors' do
-        let(:attrs) { { email: nil } }
-        let(:errors) { ['Email can\'t be blank', 'Email is invalid'] }
-        let(:status) { :unprocessable_entity }
-      end
-
-      it_behaves_like 'with errors' do
-        let(:attrs) { { password: nil } }
-        let(:errors) { ['Password can\'t be blank'] }
-        let(:status) { :unprocessable_entity }
+        it_behaves_like 'with errors' do
+          let(:attrs) { { password: nil } }
+          let(:errors) { ['Password can\'t be blank'] }
+          let(:status) { :unprocessable_entity }
+        end
       end
     end
 
