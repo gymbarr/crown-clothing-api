@@ -7,8 +7,11 @@ class UsersController < ApplicationController
   def index
     authorize(User)
 
-    @users = User.all
-    render json: @users, status: :ok
+    @pagy, @users = pagy_countless(User.all)
+    render json: {
+      users: ActiveModelSerializers::SerializableResource.new(@users),
+      pagy: pagy_metadata(@pagy)
+    }, status: :ok
   end
 
   # GET /users/{username}
