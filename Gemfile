@@ -38,9 +38,9 @@ gem "bootsnap", require: false
 
 gem 'active_model_serializers'
 gem 'jwt'
+gem 'pagy', '~> 6.0'
 gem 'pundit'
 gem 'rolify'
-gem 'pagy', '~> 6.0'
 
 group :development, :test do
   gem 'database_cleaner'
