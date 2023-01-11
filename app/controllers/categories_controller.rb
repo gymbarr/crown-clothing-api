@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  skip_before_action :authorize_request, except: %i[create update destroy]
   before_action :find_category, except: %i[create index]
   before_action :authorize_category!, except: %i[create index]
 
