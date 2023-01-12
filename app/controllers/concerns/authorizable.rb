@@ -9,12 +9,14 @@ module Authorizable
 
     def authorize_request
       header = request.headers['Authorization']
-      header = header.split.last if header
+
+      return unless header
+
       begin
         @decoded = Authorization::JsonWebTokenDecoder.call(header)
         @current_user = User.find(@decoded[:user_id])
 
-        # token refreshing
+        # refresh token
         token = Authorization::JsonWebTokenEncoder.call(user_id: @current_user.id)
         response.headers['token'] = token
       rescue ActiveRecord::RecordNotFound, JWT::DecodeError => e

@@ -19,6 +19,10 @@ class UserPolicy < ApplicationPolicy
     admin? || same_user?
   end
 
+  def me?
+    true
+  end
+
   private
 
   def same_user?
