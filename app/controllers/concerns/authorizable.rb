@@ -19,7 +19,7 @@ module Authorizable
         # refresh token
         token = Authorization::JsonWebTokenEncoder.call(user_id: @current_user.id)
         response.headers['token'] = token
-      rescue ActiveRecord::RecordNotFound, JWT::DecodeError => e
+      rescue JWT::ExpiredSignature, JWT::DecodeError, ActiveRecord::RecordNotFound => e
         user_not_authorized(e)
       end
     end

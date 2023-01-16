@@ -2,7 +2,7 @@ module Authorization
   class JsonWebTokenEncoder < ApplicationService
     SECRET_KEY = Rails.application.secrets.secret_key_base.to_s
 
-    def initialize(payload, exp = 24.hours.from_now)
+    def initialize(payload, exp = 30.seconds.from_now)
       super()
       @payload = payload
       @exp = exp
