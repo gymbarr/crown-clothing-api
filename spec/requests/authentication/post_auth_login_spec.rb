@@ -49,13 +49,13 @@ RSpec.describe 'Authentication', type: :request do
 
       it_behaves_like 'with errors' do
         let(:attrs) { { email: nil } }
-        let(:errors) { ['Unauthorized'] }
+        let(:errors) { ['Invalid email or password'] }
         let(:status) { :unauthorized }
       end
 
       it_behaves_like 'with errors' do
         let(:attrs) { { password: nil } }
-        let(:errors) { ['Unauthorized'] }
+        let(:errors) { ['Invalid email or password'] }
         let(:status) { :unauthorized }
       end
     end

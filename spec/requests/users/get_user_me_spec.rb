@@ -28,7 +28,13 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'when unauthorized user' do
-      include_examples 'not authorized'
+      it 'returns nil' do
+        expect(json).to be_nil
+      end
+
+      it 'returns ok status' do
+        expect(response).to have_http_status(:ok)
+      end
     end
   end
 end

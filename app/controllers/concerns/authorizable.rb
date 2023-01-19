@@ -20,16 +20,20 @@ module Authorizable
         token = Authorization::JsonWebTokenEncoder.call(user_id: @current_user.id)
         response.headers['token'] = token
       rescue JWT::ExpiredSignature, JWT::DecodeError, ActiveRecord::RecordNotFound => e
-        user_not_authorized(e)
+        not_authenticated(e)
       end
     end
 
-    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+    rescue_from Pundit::NotAuthorizedError, with: :not_authorized
 
     private
 
-    def user_not_authorized(exception)
+    def not_authenticated(exception)
       render json: { errors: exception.message }, status: :unauthorized
+    end
+
+    def not_authorized
+      render json: { errors: 'You are not authorized to perform this action' }, status: :unauthorized
     end
 
     def pundit_user

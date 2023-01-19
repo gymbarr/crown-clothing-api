@@ -37,6 +37,6 @@ class ApplicationPolicy
   private
 
   def admin?
-    @user.has_role?(Role.admin_user_role)
+    @user&.has_role?(Role.admin_user_role)
   end
 end
