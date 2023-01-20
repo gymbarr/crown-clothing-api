@@ -3,7 +3,7 @@ require 'requests/shared_examples/not_authorized_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Categories', type: :request do
-  describe 'DELETE /api/categories/:title' do
+  describe 'DELETE /api/categories/:category_title' do
     subject(:delete_category_request) do
       delete "/api/categories/#{category.title}", headers:
     end

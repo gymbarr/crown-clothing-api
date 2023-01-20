@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
 
   # GET /categories/{category}/products
   def index
-    # binding.pry
     @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
     pagy_headers_merge(@pagy)
     render json: @products, status: :ok
@@ -49,7 +48,7 @@ class ProductsController < ApplicationController
   end
 
   def find_product
-    @product = Product.find(title: params[:id])
+    @product = Product.find(params[:id])
   end
 
   def product_params

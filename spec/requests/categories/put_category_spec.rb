@@ -3,7 +3,7 @@ require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Categories', type: :request do
-  describe 'PUT /api/categories/:category' do
+  describe 'PUT /api/categories/:category_title' do
     subject(:put_category_request) do
       put "/api/categories/#{category.title}",
           params: new_params,
