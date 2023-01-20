@@ -1,9 +1,11 @@
 class ProductsController < ApplicationController
-  before_action :find_category, except: %i[create index]
+  before_action :find_category
   before_action :find_product, except: %i[create index]
+  skip_after_action :verify_authorized
 
   # GET /categories/{category}/products
   def index
+    # binding.pry
     @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
     pagy_headers_merge(@pagy)
     render json: @products, status: :ok
@@ -42,12 +44,12 @@ class ProductsController < ApplicationController
 
   private
 
-  def find_product
-    @product = Product.find(title: params[:id])
+  def find_category
+    @category = Category.find_by!(title: params[:category_title])
   end
 
-  def find_category
-    @category = Category.find_by!(title: params[:_title])
+  def find_product
+    @product = Product.find(title: params[:id])
   end
 
   def product_params
