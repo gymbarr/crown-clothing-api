@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     get '/user/me', to: 'users#me'
     post '/auth/login', to: 'authentication#login'
 
-    resources :categories, param: :_title
+    resources :categories, param: :_title do
+      resources :products
+    end
   end
 end
