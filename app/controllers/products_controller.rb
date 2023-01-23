@@ -1,10 +1,12 @@
 class ProductsController < ApplicationController
   before_action :find_category
   before_action :find_product, except: %i[create index]
-  skip_after_action :verify_authorized
+  before_action :authorize_product!, except: %i[create index]
 
   # GET /categories/{category}/products
   def index
+    authorize(Product)
+
     @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
     pagy_headers_merge(@pagy)
     render json: @products, status: :ok
@@ -17,6 +19,8 @@ class ProductsController < ApplicationController
 
   # POST /categories/{category}/products
   def create
+    authorize(Product)
+
     @product = Product.new(product_params)
     if @product.save
       render json: @product, status: :created
@@ -53,5 +57,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params.permit(:title, :price, :category_id)
+  end
+
+  def authorize_product!
+    authorize(@product)
   end
 end

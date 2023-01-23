@@ -55,10 +55,10 @@ RSpec.describe 'Products', type: :request do
       end
     end
 
-    # context 'when unauthorized user' do
-    #   let(:params) { nil }
+    context 'when unauthorized user' do
+      let(:params) { nil }
 
-    #   include_examples 'not authorized'
-    # end
+      include_examples 'not authorized'
+    end
   end
 end

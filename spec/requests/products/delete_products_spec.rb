@@ -28,8 +28,8 @@ RSpec.describe 'Products', type: :request do
       end
     end
 
-    # context 'when unauthorized user' do
-    #   include_examples 'not authorized'
-    # end
+    context 'when unauthorized user' do
+      include_examples 'not authorized'
+    end
   end
 end

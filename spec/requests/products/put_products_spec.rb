@@ -42,7 +42,7 @@ RSpec.describe 'Products', type: :request do
       end
 
       context 'with invalid parameters' do
-        let(:new_params) { attributes_for :category, **attrs }
+        let(:new_params) { attributes_for :product, **attrs }
 
         it_behaves_like 'with errors' do
           let(:attrs) { { title: nil } }
@@ -58,10 +58,10 @@ RSpec.describe 'Products', type: :request do
       end
     end
 
-    # context 'when unauthorized user' do
-    #   let(:new_params) { attributes_for :category }
+    context 'when unauthorized user' do
+      let(:new_params) { attributes_for :product }
 
-    #   include_examples 'not authorized'
-    # end
+      include_examples 'not authorized'
+    end
   end
 end
