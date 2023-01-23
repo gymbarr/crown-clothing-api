@@ -12,9 +12,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/{category}
   def show
-    @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
-    pagy_headers_merge(@pagy)
-    render json: @products, status: :ok
+    render json: @category, status: :ok
   end
 
   # POST /categories
@@ -48,7 +46,7 @@ class CategoriesController < ApplicationController
   private
 
   def find_category
-    @category = Category.find_by!(title: params[:_title])
+    @category = Category.find_by!(title: params[:category_title])
   end
 
   def category_params
