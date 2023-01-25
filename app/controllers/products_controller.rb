@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :find_category
   before_action :find_product, except: %i[create index]
+  before_action :check_category_equality, except: %i[create index]
   before_action :authorize_product!, except: %i[create index]
 
   # GET /categories/{category}/products
@@ -53,6 +54,10 @@ class ProductsController < ApplicationController
 
   def find_product
     @product = Product.find(params[:id])
+  end
+
+  def check_category_equality
+    raise ActiveRecord::RecordNotFound unless @product.category == @category
   end
 
   def product_params
