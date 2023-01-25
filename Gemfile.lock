@@ -231,6 +231,7 @@ GEM
     rubocop-rspec (2.16.0)
       rubocop (~> 1.33)
     ruby-progressbar (1.11.0)
+    stripe (8.1.0)
     thor (1.2.1)
     timeout (0.3.1)
     tzinfo (2.0.5)
@@ -268,6 +269,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  stripe (~> 8.1.0)
   tzinfo-data
 
 RUBY VERSION
