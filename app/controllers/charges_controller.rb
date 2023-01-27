@@ -1,29 +1,16 @@
 class ChargesController < ApplicationController
   skip_after_action :verify_authorized
 
-  # def create
-  #   payment_intent = Stripe::PaymentIntent.create(
-  #     amount: params[:amount],
-  #     currency: 'usd',
-  #     payment_method_types: ['card']
-  #   )
-
-  #   render json: { clientSecret: payment_intent['client_secret'] }, status: :ok
-  # rescue Stripe => e
-  #   render json: { errors: e.messages }, status: :bad_request
-  # end
-
   def create
     session = Stripe::Checkout::Session.create({
+                                                 customer_email: @current_user.email,
                                                  payment_method_types: ['card'],
                                                  line_items: [{
                                                    price_data: {
                                                      currency: 'usd',
                                                      unit_amount: params[:amount],
                                                      product_data: {
-                                                       name: 'T-shirt',
-                                                       description: 'Comfortable cotton t-shirt',
-                                                       images: ['https://example.com/t-shirt.png'],
+                                                       name: 'Crown clothing',
                                                      }
                                                    },
                                                    quantity: 1
