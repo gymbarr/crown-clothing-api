@@ -9,5 +9,7 @@ Rails.application.routes.draw do
         resources :products
       end
     end
+
+    post '/charges/create', to: 'charges#create'
   end
 end

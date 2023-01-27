@@ -1,9 +1,11 @@
 class ProductSerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+  
   attributes :id, :title, :price
   attribute :category do
     object.category.title
   end
   attribute :imageUrl do
-    object.image.url
+    url_for object.image
   end
 end

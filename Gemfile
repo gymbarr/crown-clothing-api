@@ -41,6 +41,7 @@ gem 'jwt'
 gem 'pagy', '~> 6.0'
 gem 'pundit'
 gem 'rolify'
+gem 'stripe', '~> 8.1.0'
 
 group :development, :test do
   gem 'database_cleaner'
