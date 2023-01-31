@@ -9,6 +9,9 @@ class ProductSerializer < ActiveModel::Serializer
     url_for object.image
   end
   attribute :colors do
-    object.colors
+    object.variants.pluck(:color).uniq
+  end
+  attribute :sizes do
+    object.variants.pluck(:size).uniq
   end
 end

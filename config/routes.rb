@@ -6,7 +6,11 @@ Rails.application.routes.draw do
 
     resources :categories, param: :category_title do
       member do
-        resources :products
+        resources :products do
+          member do
+            get '/show_variants', to: 'products#show_variants'
+          end
+        end
       end
     end
 
