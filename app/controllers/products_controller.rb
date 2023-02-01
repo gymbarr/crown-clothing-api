@@ -17,6 +17,14 @@ class ProductsController < ApplicationController
     render json: @product, status: :ok
   end
 
+  # GET /categories/{category}/products/{id}/show_variants
+  def show_variants
+    @available_variants = @product.variants
+    return render json: @available_variants, status: :ok if variants_filter_params.blank?
+
+    render json: @available_variants.where(variants_filter_params), status: :ok
+  end
+
   # POST /categories/{category}/products
   def create
     authorize(Product)
@@ -52,11 +60,15 @@ class ProductsController < ApplicationController
   end
 
   def find_product
-    @product = @category.products.find(params[:id])
+    @product = @category.products.includes(:variants).find(params[:id])
   end
 
   def product_params
     params.permit(:title, :price, :category_id)
+  end
+
+  def variants_filter_params
+    @variants_filter_params ||= params.permit(attrs: %i[color])[:attrs]
   end
 
   def authorize_product!

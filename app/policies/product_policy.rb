@@ -18,4 +18,8 @@ class ProductPolicy < ApplicationPolicy
   def show?
     true
   end
+
+  def show_variants?
+    true
+  end
 end
