@@ -9,6 +9,7 @@ class ProductsController < ApplicationController
 
     @products = @category.products.includes(:variants)
     @available_colors = @products.pluck(:color).uniq
+    @available_sizes = @products.pluck(:size).uniq.sort
     @products = @products.where(variants: products_filters_params) if products_filters_params.present?
 
     @pagy, @products = pagy(@products.order(created_at: :desc), items: params[:items])
@@ -17,7 +18,8 @@ class ProductsController < ApplicationController
     render json: {
       products: ActiveModelSerializers::SerializableResource.new(@products),
       filters: {
-        colors: @available_colors
+        colors: @available_colors,
+        sizes: @available_sizes
       }
     }, status: :ok
   end
@@ -78,7 +80,7 @@ class ProductsController < ApplicationController
   end
 
   def products_filters_params
-    @products_filters_params ||= params.permit(filters: { color: [] })[:filters].to_h
+    @products_filters_params ||= params.permit(filters: { color: [], size: [] })[:filters].to_h
   end
 
   def variants_filter_params
