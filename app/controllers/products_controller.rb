@@ -7,9 +7,19 @@ class ProductsController < ApplicationController
   def index
     authorize(Product)
 
-    @pagy, @products = pagy(@category.products.order(created_at: :desc), items: params[:items])
+    @products = @category.products.includes(:variants)
+    @available_colors = @products.pluck(:color).uniq
+    @products = @products.where(variants: products_filters_params) if products_filters_params.present?
+
+    @pagy, @products = pagy(@products.order(created_at: :desc), items: params[:items])
     pagy_headers_merge(@pagy)
-    render json: @products, status: :ok
+
+    render json: {
+      products: ActiveModelSerializers::SerializableResource.new(@products),
+      filters: {
+        colors: @available_colors
+      }
+    }, status: :ok
   end
 
   # GET /categories/{category}/products/{id}
@@ -65,6 +75,10 @@ class ProductsController < ApplicationController
 
   def product_params
     params.permit(:title, :price, :category_id)
+  end
+
+  def products_filters_params
+    @products_filters_params ||= params.permit(filters: { color: [] })[:filters].to_h
   end
 
   def variants_filter_params
