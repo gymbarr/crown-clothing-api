@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       end
     end
 
+    get '/results', to: 'results#index'
+
     post '/charges/create', to: 'charges#create'
   end
 end

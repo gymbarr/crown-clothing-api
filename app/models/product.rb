@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include PgSearch
+
   TITLE_MIN_LENGTH = 3
   TITLE_MAX_LENGTH = 40
 
@@ -7,4 +9,6 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   validates :title, presence: true, length: { minimum: TITLE_MIN_LENGTH, maximum: TITLE_MAX_LENGTH }
+
+  pg_search_scope :search_everywhere, against: %i[title]
 end

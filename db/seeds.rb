@@ -49,7 +49,10 @@ def random_items(array)
   array.sample(1 + rand(array.count))
 end
 
-def create_product(title, price, category, image_url, filename)
+def create_product(category, image_url, filename)
+  title = Faker::Commerce.product_name
+  price = Faker::Commerce.price(range: 0..1000)
+
   Product.create(title:, price:, category:)
          .image.attach(io: Rails.root.join(image_url).open, filename:, content_type: 'image/png')
 
@@ -63,51 +66,51 @@ def create_product(title, price, category, image_url, filename)
 end
 
 3.times do
-  create_product('Brown Brim', 25, hats, 'app/assets/images/products/hats/brown-brim.png', 'brown-brim.png')
-  create_product('Blue Beanie', 18, hats, 'app/assets/images/products/hats/blue-beanie.png', 'blue-beanie.png')
-  create_product('Brown Cowboy', 35, hats, 'app/assets/images/products/hats/brown-cowboy.png', 'brown-cowboy.png')
-  create_product('Grey Brim', 25, hats, 'app/assets/images/products/hats/grey-brim.png', 'grey-brim.png')
-  create_product('Green Beanie', 18, hats, 'app/assets/images/products/hats/green-beanie.png', 'green-beanie.png')
-  create_product('Palm Tree Cap', 14, hats, 'app/assets/images/products/hats/palm-tree-cap.png', 'palm-tree-cap.png')
-  create_product('Red Beanie', 18, hats, 'app/assets/images/products/hats/red-beanie.png', 'red-beanie.png')
-  create_product('Wolf Cap', 14, hats, 'app/assets/images/products/hats/wolf-cap.png', 'wolf-cap.png')
-  create_product('Blue Snapback', 16, hats, 'app/assets/images/products/hats/blue-snapback.png', 'blue-snapback.png')
+  create_product(hats, 'app/assets/images/products/hats/brown-brim.png', 'brown-brim.png')
+  create_product(hats, 'app/assets/images/products/hats/blue-beanie.png', 'blue-beanie.png')
+  create_product(hats, 'app/assets/images/products/hats/brown-cowboy.png', 'brown-cowboy.png')
+  create_product(hats, 'app/assets/images/products/hats/grey-brim.png', 'grey-brim.png')
+  create_product(hats, 'app/assets/images/products/hats/green-beanie.png', 'green-beanie.png')
+  create_product(hats, 'app/assets/images/products/hats/palm-tree-cap.png', 'palm-tree-cap.png')
+  create_product(hats, 'app/assets/images/products/hats/red-beanie.png', 'red-beanie.png')
+  create_product(hats, 'app/assets/images/products/hats/wolf-cap.png', 'wolf-cap.png')
+  create_product(hats, 'app/assets/images/products/hats/blue-snapback.png', 'blue-snapback.png')
 end
 
 3.times do
-  create_product('Adidas NMD', 220, sneakers, 'app/assets/images/products/sneakers/adidas-nmd.png', 'adidas-nmd.png')
-  create_product('Adidas Yeezy', 280, sneakers, 'app/assets/images/products/sneakers/yeezy.png', 'yeezy.png')
-  create_product('Black Converse', 110, sneakers, 'app/assets/images/products/sneakers/black-converse.png', 'black-converse.png')
-  create_product('Nike White AirForce', 160, sneakers, 'app/assets/images/products/sneakers/white-nike-high-tops.png', 'white-nike-high-tops.png')
-  create_product('Nike Red High Tops', 160, sneakers, 'app/assets/images/products/sneakers/nikes-red.png', 'nikes-red.png')
-  create_product('Nike Brown High Tops', 160, sneakers, 'app/assets/images/products/sneakers/nike-brown.png', 'nike-brown.png')
-  create_product('Air Jordan Limited', 190, sneakers, 'app/assets/images/products/sneakers/nike-funky.png', 'nike-funky.png')
-  create_product('Timberlands', 200, sneakers, 'app/assets/images/products/sneakers/timberlands.png', 'timberlands.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/adidas-nmd.png', 'adidas-nmd.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/yeezy.png', 'yeezy.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/black-converse.png', 'black-converse.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/white-nike-high-tops.png', 'white-nike-high-tops.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/nikes-red.png', 'nikes-red.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/nike-brown.png', 'nike-brown.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/nike-funky.png', 'nike-funky.png')
+  create_product(sneakers, 'app/assets/images/products/sneakers/timberlands.png', 'timberlands.png')
 end
 
 3.times do
-  create_product('Black Jean Shearling', 125, jackets, 'app/assets/images/products/jackets/black-shearling.png', 'black-shearling.png')
-  create_product('Blue Jean Jacket', 90, jackets, 'app/assets/images/products/jackets/blue-jean-jacket.png', 'blue-jean-jacket.png')
-  create_product('Grey Jean Jacket', 90, jackets, 'app/assets/images/products/jackets/grey-jean-jacket.png', 'grey-jean-jacket.png')
-  create_product('Brown Shearling', 165, jackets, 'app/assets/images/products/jackets/brown-shearling.png', 'brown-shearling.png')
-  create_product('Tan Trench', 185, jackets, 'app/assets/images/products/jackets/brown-trench.png', 'brown-trench.png')
+  create_product(jackets, 'app/assets/images/products/jackets/black-shearling.png', 'black-shearling.png')
+  create_product(jackets, 'app/assets/images/products/jackets/blue-jean-jacket.png', 'blue-jean-jacket.png')
+  create_product(jackets, 'app/assets/images/products/jackets/grey-jean-jacket.png', 'grey-jean-jacket.png')
+  create_product(jackets, 'app/assets/images/products/jackets/brown-shearling.png', 'brown-shearling.png')
+  create_product(jackets, 'app/assets/images/products/jackets/brown-trench.png', 'brown-trench.png')
 end
 
 3.times do
-  create_product('Blue Tanktop', 25, womens, 'app/assets/images/products/womens/blue-tank.png', 'blue-tank.png')
-  create_product('Floral Blouse', 20, womens, 'app/assets/images/products/womens/floral-blouse.png', 'floral-blouse.png')
-  create_product('Floral Dress', 80, womens, 'app/assets/images/products/womens/floral-skirt.png', 'floral-skirt.png')
-  create_product('Red Dots Dress', 80, womens, 'app/assets/images/products/womens/red-polka-dot-dress.png', 'red-polka-dot-dress.png')
-  create_product('Striped Sweater', 45, womens, 'app/assets/images/products/womens/striped-sweater.png', 'striped-sweater.png')
-  create_product('Yellow Track Suit', 135, womens, 'app/assets/images/products/womens/yellow-track-suit.png', 'yellow-track-suit.png')
-  create_product('White Blouse', 20, womens, 'app/assets/images/products/womens/white-vest.png', 'white-vest.png')
+  create_product(womens, 'app/assets/images/products/womens/blue-tank.png', 'blue-tank.png')
+  create_product(womens, 'app/assets/images/products/womens/floral-blouse.png', 'floral-blouse.png')
+  create_product(womens, 'app/assets/images/products/womens/floral-skirt.png', 'floral-skirt.png')
+  create_product(womens, 'app/assets/images/products/womens/red-polka-dot-dress.png', 'red-polka-dot-dress.png')
+  create_product(womens, 'app/assets/images/products/womens/striped-sweater.png', 'striped-sweater.png')
+  create_product(womens, 'app/assets/images/products/womens/yellow-track-suit.png', 'yellow-track-suit.png')
+  create_product(womens, 'app/assets/images/products/womens/white-vest.png', 'white-vest.png')
 end
 
 3.times do
-  create_product('Camo Down Vest', 325, mens, 'app/assets/images/products/mens/camo-vest.png', 'camo-vest.png')
-  create_product('Floral T-shirt', 20, mens, 'app/assets/images/products/mens/floral-shirt.png', 'floral-shirt.png')
-  create_product('Black & White Longsleeve', 80, mens, 'app/assets/images/products/mens/long-sleeve.png', 'long-sleeve.png')
-  create_product('Pink T-shirt', 25, mens, 'app/assets/images/products/mens/pink-shirt.png', 'pink-shirt.png')
-  create_product('Jean Long Sleeve', 20, mens, 'app/assets/images/products/mens/roll-up-jean-shirt.png', 'froll-up-jean-shirt.png')
-  create_product('Burgundy T-shirt', 25, mens, 'app/assets/images/products/mens/polka-dot-shirt.png', 'polka-dot-shirt.png')
+  create_product(mens, 'app/assets/images/products/mens/camo-vest.png', 'camo-vest.png')
+  create_product(mens, 'app/assets/images/products/mens/floral-shirt.png', 'floral-shirt.png')
+  create_product(mens, 'app/assets/images/products/mens/long-sleeve.png', 'long-sleeve.png')
+  create_product(mens, 'app/assets/images/products/mens/pink-shirt.png', 'pink-shirt.png')
+  create_product(mens, 'app/assets/images/products/mens/roll-up-jean-shirt.png', 'froll-up-jean-shirt.png')
+  create_product(mens, 'app/assets/images/products/mens/polka-dot-shirt.png', 'polka-dot-shirt.png')
 end
