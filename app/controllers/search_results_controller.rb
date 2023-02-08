@@ -1,9 +1,9 @@
-class ResultsController < ApplicationController
+class SearchResultsController < ApplicationController
   skip_before_action :authorize_request
   skip_after_action :verify_authorized
 
   def index
-    @search_results = Product.search_everywhere(params[:query])
+    @search_results = Product.search_by_title(params[:query])
 
     @pagy, @search_results = pagy_countless(@search_results.order(created_at: :desc))
 
