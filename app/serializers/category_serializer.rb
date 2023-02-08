@@ -1,6 +1,9 @@
 class CategorySerializer < ActiveModel::Serializer
+  include Rails.application.routes.url_helpers
+
   attributes :id, :title
+
   attribute :imageUrl do
-    object.image.url
+    url_for object.image
   end
 end
