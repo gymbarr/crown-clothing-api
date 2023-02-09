@@ -40,6 +40,7 @@ gem 'active_model_serializers'
 gem 'jwt'
 gem 'pagy', '~> 6.0'
 gem 'pundit'
+gem 'pg_search', '~> 2.3.6'
 gem 'rolify'
 gem 'stripe', '~> 8.1.0'
 
