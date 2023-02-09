@@ -1,9 +1,7 @@
 class SearchResultsController < ApplicationController
-  skip_before_action :authorize_request
   skip_after_action :verify_authorized
 
   def index
-    # sort by rank!!
     @search_results = PgSearch.multisearch(params[:query])
     @categories_searchable = @search_results.where(searchable_type: 'Category').limit(10)
 
