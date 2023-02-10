@@ -37,6 +37,8 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 gem 'active_model_serializers'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'jwt'
 gem 'pagy', '~> 6.0'
 gem 'pundit'
@@ -51,6 +53,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 3'
   gem 'pry', '~> 0.13.1'
+  
 end
 
 group :development do

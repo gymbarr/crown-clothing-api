@@ -1,4 +1,4 @@
-class SearchResultsController < ApplicationController
+class PgSearchResultsController < ApplicationController
   skip_after_action :verify_authorized
 
   def index

@@ -65,7 +65,7 @@ def create_product(category, image_url, filename)
   end
 end
 
-3.times do
+10.times do
   create_product(hats, 'app/assets/images/products/hats/brown-brim.png', 'brown-brim.png')
   create_product(hats, 'app/assets/images/products/hats/blue-beanie.png', 'blue-beanie.png')
   create_product(hats, 'app/assets/images/products/hats/brown-cowboy.png', 'brown-cowboy.png')
@@ -77,7 +77,7 @@ end
   create_product(hats, 'app/assets/images/products/hats/blue-snapback.png', 'blue-snapback.png')
 end
 
-3.times do
+10.times do
   create_product(sneakers, 'app/assets/images/products/sneakers/adidas-nmd.png', 'adidas-nmd.png')
   create_product(sneakers, 'app/assets/images/products/sneakers/yeezy.png', 'yeezy.png')
   create_product(sneakers, 'app/assets/images/products/sneakers/black-converse.png', 'black-converse.png')
@@ -88,7 +88,7 @@ end
   create_product(sneakers, 'app/assets/images/products/sneakers/timberlands.png', 'timberlands.png')
 end
 
-3.times do
+10.times do
   create_product(jackets, 'app/assets/images/products/jackets/black-shearling.png', 'black-shearling.png')
   create_product(jackets, 'app/assets/images/products/jackets/blue-jean-jacket.png', 'blue-jean-jacket.png')
   create_product(jackets, 'app/assets/images/products/jackets/grey-jean-jacket.png', 'grey-jean-jacket.png')
@@ -96,7 +96,7 @@ end
   create_product(jackets, 'app/assets/images/products/jackets/brown-trench.png', 'brown-trench.png')
 end
 
-3.times do
+10.times do
   create_product(womens, 'app/assets/images/products/womens/blue-tank.png', 'blue-tank.png')
   create_product(womens, 'app/assets/images/products/womens/floral-blouse.png', 'floral-blouse.png')
   create_product(womens, 'app/assets/images/products/womens/floral-skirt.png', 'floral-skirt.png')
@@ -106,7 +106,7 @@ end
   create_product(womens, 'app/assets/images/products/womens/white-vest.png', 'white-vest.png')
 end
 
-3.times do
+10.times do
   create_product(mens, 'app/assets/images/products/mens/camo-vest.png', 'camo-vest.png')
   create_product(mens, 'app/assets/images/products/mens/floral-shirt.png', 'floral-shirt.png')
   create_product(mens, 'app/assets/images/products/mens/long-sleeve.png', 'long-sleeve.png')
@@ -114,3 +114,6 @@ end
   create_product(mens, 'app/assets/images/products/mens/roll-up-jean-shirt.png', 'froll-up-jean-shirt.png')
   create_product(mens, 'app/assets/images/products/mens/polka-dot-shirt.png', 'polka-dot-shirt.png')
 end
+
+Category.__elasticsearch__.create_index!
+Product.__elasticsearch__.create_index!

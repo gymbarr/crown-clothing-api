@@ -14,7 +14,8 @@ Rails.application.routes.draw do
       end
     end
 
-    get '/search_results', to: 'search_results#index'
+    get '/pg_search_results', to: 'pg_search_results#index'
+    get '/elastic_search_results', to: 'elastic_search_results#index'
 
     post '/charges/create', to: 'charges#create'
   end

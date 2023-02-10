@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   include PgSearch::Model
+  include Searchable
 
   TITLE_MIN_LENGTH = 3
   TITLE_MAX_LENGTH = 40
