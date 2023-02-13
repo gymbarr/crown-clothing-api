@@ -47,13 +47,13 @@ gem 'rolify'
 gem 'stripe', '~> 8.1.0'
 
 group :development, :test do
+  gem 'benchmark'
   gem 'database_cleaner'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', '~> 3'
   gem 'pry', '~> 0.13.1'
-  
 end
 
 group :development do
