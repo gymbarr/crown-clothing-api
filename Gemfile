@@ -37,6 +37,8 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 gem 'active_model_serializers'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
 gem 'jwt'
 gem 'pagy', '~> 6.0'
 gem 'pundit'
@@ -45,6 +47,7 @@ gem 'rolify'
 gem 'stripe', '~> 8.1.0'
 
 group :development, :test do
+  gem 'benchmark'
   gem 'database_cleaner'
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'dotenv-rails'
