@@ -5,18 +5,17 @@ class ElasticSearchResultsController < ApplicationController
 
   def index
     performance = Benchmark.measure do
-      @search_results = Elasticsearch::Model.search("#{params[:query]}*", [], { size: 10000 }).records.to_a
+      search_results = Searchkick.search(params[:query], models: [Product, Category], match: :word_start, load: false)
+      @categories = search_results.select { |result| result.type == 'Category' }
 
-      @categories = @search_results.select { |result| result.class.name == 'Category' }
-
-      @pagy, @products = pagy_array(@search_results.select { |result| result.class.name == 'Product' })
+      @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })
     end
 
     response_time = (performance.real * 1000).round(2)
 
     render json: {
-      categories: ActiveModelSerializers::SerializableResource.new(@categories),
-      products: ActiveModelSerializers::SerializableResource.new(@products),
+      categories: @categories,
+      products: @products,
       performance: response_time,
       pagy: pagy_metadata(@pagy)
     }, status: :ok

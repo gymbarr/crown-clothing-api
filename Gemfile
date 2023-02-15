@@ -37,13 +37,14 @@ gem "bootsnap", require: false
 gem "rack-cors"
 
 gem 'active_model_serializers'
-gem 'elasticsearch-model'
-gem 'elasticsearch-rails'
+gem 'elasticsearch'
 gem 'jwt'
+gem 'oj'
 gem 'pagy', '~> 6.0'
 gem 'pundit'
 gem 'pg_search', '~> 2.3.6'
 gem 'rolify'
+gem 'searchkick'
 gem 'stripe', '~> 8.1.0'
 
 group :development, :test do
