@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :category do
-    title { Faker::Alphanumeric.unique.alpha(number: 15) }
+    title { Faker::Commerce.department(max: 1) }
   end
 end

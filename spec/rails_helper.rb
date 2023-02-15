@@ -10,6 +10,7 @@ require 'support/api_helpers'
 require 'database_cleaner'
 require 'pundit/rspec'
 require 'pundit/matchers'
+require 'rspec-benchmark'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -64,6 +65,8 @@ RSpec.configure do |config|
   config.after(:all) do
     DatabaseCleaner.clean
   end
+
+  config.include RSpec::Benchmark::Matchers
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
