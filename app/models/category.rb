@@ -1,9 +1,10 @@
 class Category < ApplicationRecord
   include PgSearch::Model
-  include Searchable
 
   TITLE_MIN_LENGTH = 3
   TITLE_MAX_LENGTH = 40
+
+  searchkick word_start: %i[title], searchable: [:title]
 
   has_many :products, dependent: :destroy
   has_one_attached :image
@@ -12,7 +13,10 @@ class Category < ApplicationRecord
 
   multisearchable against: %i[title]
 
-  def my_class
-    self.class
+  def search_data
+    {
+      type: self.class,
+      title:
+    }
   end
 end

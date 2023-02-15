@@ -102,11 +102,6 @@ GEM
       elasticsearch-transport (= 7.17.7)
     elasticsearch-api (7.17.7)
       multi_json
-    elasticsearch-model (7.2.1)
-      activesupport (> 3)
-      elasticsearch (~> 7)
-      hashie
-    elasticsearch-rails (7.2.1)
     elasticsearch-transport (7.17.7)
       faraday (~> 1)
       multi_json
@@ -179,6 +174,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.1-arm64-darwin)
       racc (~> 1.4)
+    oj (3.14.2)
     pagy (6.0.1)
     parallel (1.22.1)
     parser (3.2.0.0)
@@ -278,6 +274,9 @@ GEM
       rubocop-capybara (~> 2.17)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
+    searchkick (5.2.0)
+      activemodel (>= 5.2)
+      hashie
     stripe (8.1.0)
     thor (1.2.1)
     timeout (0.3.1)
@@ -300,11 +299,11 @@ DEPENDENCIES
   database_cleaner
   debug
   dotenv-rails
-  elasticsearch-model
-  elasticsearch-rails
+  elasticsearch
   factory_bot_rails
   faker (~> 3)
   jwt
+  oj
   pagy (~> 6.0)
   pg (~> 1.1)
   pg_search (~> 2.3.6)
@@ -320,6 +319,7 @@ DEPENDENCIES
   rubocop-performance
   rubocop-rails
   rubocop-rspec
+  searchkick
   stripe (~> 8.1.0)
   tzinfo-data
 
