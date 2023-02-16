@@ -3,7 +3,11 @@ class CategorySerializer < ActiveModel::Serializer
 
   attributes :id, :title
 
-  attribute :imageUrl do
+  attribute :imageUrl, if: :image_attached? do
     url_for object.image
+  end
+
+  def image_attached?
+    object.image.attached?
   end
 end

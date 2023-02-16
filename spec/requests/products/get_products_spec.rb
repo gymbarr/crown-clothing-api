@@ -17,8 +17,8 @@ RSpec.describe 'Products', type: :request do
     end
 
     it 'returns products of the first page' do
-      expect(json).to match_array(products_json)
-      expect(json.size).to eq(products_per_page)
+      expect(json['products']).to match_array(products_json)
+      expect(json['products'].size).to eq(products_per_page)
     end
 
     it 'returns ok status' do

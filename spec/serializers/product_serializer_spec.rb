@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProductSerializer, type: :serializer do
+  include Rails.application.routes.url_helpers
+
   describe '.serializable_hash' do
     subject(:product_serializer) { described_class.new(product).serializable_hash }
 
@@ -11,8 +13,10 @@ RSpec.describe ProductSerializer, type: :serializer do
         id: product.id,
         title: product.title,
         price: product.price,
-        category_id: product.category_id,
-        imageUrl: product.image.url
+        category: product.category.title,
+        imageUrl: url_for(product.image),
+        colors: product.variants.pluck(:color).uniq,
+        sizes: product.variants.pluck(:size).uniq
       )
     end
   end
