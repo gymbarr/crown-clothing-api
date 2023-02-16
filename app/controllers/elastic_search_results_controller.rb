@@ -4,6 +4,7 @@ class ElasticSearchResultsController < ApplicationController
   skip_after_action :verify_authorized
 
   def index
+    search_results = []
     performance = Benchmark.measure do
       search_results = Searchkick.search(
         params[:query],
@@ -12,11 +13,10 @@ class ElasticSearchResultsController < ApplicationController
         load: false,
         misspellings: false
       )
-      @categories = search_results.select { |result| result.type == 'Category' }
-
-      @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })
     end
 
+    @categories = search_results.select { |result| result.type == 'Category' }
+    @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })
     response_time = (performance.real * 1000).round(2)
 
     render json: {

@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require_relative 'support/factory_bot'
 require 'support/api_helpers'
+require 'support/search_helpers'
 require 'database_cleaner'
 require 'pundit/rspec'
 require 'pundit/matchers'
@@ -92,4 +93,5 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   config.include ApiHelpers, type: :request
+  config.include SearchHelpers, type: :performance
 end
