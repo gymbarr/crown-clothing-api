@@ -5,7 +5,13 @@ class ElasticSearchResultsController < ApplicationController
 
   def index
     performance = Benchmark.measure do
-      search_results = Searchkick.search(params[:query], models: [Product, Category], match: :word_start, load: false)
+      search_results = Searchkick.search(
+        params[:query],
+        models: [Product, Category],
+        match: :word_start,
+        load: false,
+        misspellings: false
+      )
       @categories = search_results.select { |result| result.type == 'Category' }
 
       @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })

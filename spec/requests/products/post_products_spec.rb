@@ -21,16 +21,16 @@ RSpec.describe 'Products', type: :request do
       context 'with valid parameters' do
         let(:params) { attributes_for :product, category_id: category.id }
 
-        it 'returns a title' do
+        it 'returns the product title' do
           expect(json['title']).to eq(params[:title])
         end
 
-        it 'returns a price' do
+        it 'returns the product price' do
           expect(json['price']).to eq(params[:price])
         end
 
-        it 'returns a category_id' do
-          expect(json['category_id']).to eq(params[:category_id])
+        it 'returns the category title' do
+          expect(json['category']).to eq(category.title)
         end
 
         it 'returns created status' do
@@ -49,7 +49,7 @@ RSpec.describe 'Products', type: :request do
 
         it_behaves_like 'with errors' do
           let(:attrs) { { category_id: nil } }
-          let(:errors) { ['Category must exist', 'Category can\'t be blank'] }
+          let(:errors) { ['Category must exist'] }
           let(:status) { :unprocessable_entity }
         end
       end

@@ -11,16 +11,20 @@ RSpec.describe 'Products', type: :request do
       get_product_request
     end
 
-    it 'returns the title' do
+    it 'returns the product id' do
+      expect(json['id']).to eq(product.id)
+    end
+
+    it 'returns the product title' do
       expect(json['title']).to eq(product.title)
     end
 
-    it 'returns the price' do
+    it 'returns the product price' do
       expect(json['price']).to eq(product.price)
     end
 
-    it 'returns the category id' do
-      expect(json['category_id']).to eq(category.id)
+    it 'returns the category title' do
+      expect(json['category']).to eq(category.title)
     end
 
     it 'returns ok status' do

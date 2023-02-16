@@ -20,7 +20,7 @@ class Product < ApplicationRecord
       type: self.class,
       title:,
       price:,
-      # imageUrl: url_for(self.image)
+      imageUrl: url_for(self.image)
     }
   end
 end

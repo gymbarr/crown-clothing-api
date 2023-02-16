@@ -11,7 +11,8 @@ RSpec.describe 'Products', type: :request do
     end
 
     let(:category) { create :category }
-    let(:product) { create :product }
+    let(:product) { create :product, category: }
+    let(:new_category) { create :category }
 
     before do
       put_product_request
@@ -22,7 +23,7 @@ RSpec.describe 'Products', type: :request do
       let(:headers) { user_auth_header(user) }
 
       context 'with valid parameters' do
-        let(:new_params) { attributes_for :product, category_id: category.id }
+        let(:new_params) { attributes_for :product, category_id: new_category.id }
 
         it 'changes the product title' do
           expect(product.reload.title).to eq(new_params[:title])
@@ -52,7 +53,7 @@ RSpec.describe 'Products', type: :request do
 
         it_behaves_like 'with errors' do
           let(:attrs) { { category_id: nil } }
-          let(:errors) { ['Category must exist', 'Category can\'t be blank'] }
+          let(:errors) { ['Category must exist'] }
           let(:status) { :unprocessable_entity }
         end
       end

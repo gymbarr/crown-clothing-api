@@ -5,7 +5,7 @@ class ProductSerializer < ActiveModel::Serializer
   attribute :category do
     object.category.title
   end
-  attribute :imageUrl do
+  attribute :imageUrl, if: :image_attached? do
     url_for object.image
   end
   attribute :colors do
@@ -13,5 +13,9 @@ class ProductSerializer < ActiveModel::Serializer
   end
   attribute :sizes do
     object.variants.pluck(:size).uniq
+  end
+
+  def image_attached?
+    object.image.attached?
   end
 end
