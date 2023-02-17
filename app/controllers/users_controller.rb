@@ -8,14 +8,14 @@ class UsersController < ApplicationController
 
     @pagy, @users = pagy_countless(User.all)
     render json: Panko::Response.new(
-      users: Panko::ArraySerializer.new(@users, each_serializer: UserSerializer),
+      users: Panko::ArraySerializer.new(@users, each_serializer: PankoSerializers::UserSerializer),
       pagy: pagy_metadata(@pagy)
     ), status: :ok
   end
 
   # GET /users/{username}
   def show
-    render json: UserSerializer.new.serialize(@user), status: :ok
+    render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :ok
   end
 
   # POST /users
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
       response.headers['token'] = token
 
-      render json: UserSerializer.new.serialize(@user), status: :created
+      render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :created
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   # PUT /users/{username}
   def update
     if @user.update(user_params)
-      render json: UserSerializer.new.serialize(@user), status: :ok
+      render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :ok
     else
       render json: { errors: @user.errors.full_messages },
              status: :unprocessable_entity
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
 
     return render status: :no_content unless @current_user
 
-    render json: UserSerializer.new.serialize_to_json(@current_user), status: :ok
+    render json: PankoSerializers::UserSerializer.new.serialize_to_json(@current_user), status: :ok
   end
 
   private

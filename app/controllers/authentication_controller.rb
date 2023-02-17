@@ -8,7 +8,7 @@ class AuthenticationController < ApplicationController
       token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
       response.headers['token'] = token
 
-      render json: UserSerializer.new.serialize(@user), status: :ok
+      render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :ok
     else
       render json: { errors: ['Invalid email or password'] }, status: :unauthorized
     end

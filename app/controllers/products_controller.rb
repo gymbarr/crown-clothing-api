@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     pagy_headers_merge(@pagy)
 
     render json: Panko::Response.new(
-      products: Panko::ArraySerializer.new(@products, each_serializer: ProductSerializer),
+      products: Panko::ArraySerializer.new(@products, each_serializer: PankoSerializers::ProductSerializer),
       filters: {
         colors: @available_colors,
         sizes: @available_sizes
@@ -26,17 +26,17 @@ class ProductsController < ApplicationController
 
   # GET /categories/{category}/products/{id}
   def show
-    render json: ProductSerializer.new.serialize(@product), status: :ok
+    render json: PankoSerializers::ProductSerializer.new.serialize(@product), status: :ok
   end
 
   # GET /categories/{category}/products/{id}/show_variants
   def show_variants
     @available_variants = @product.variants
     if variants_filter_params.blank?
-      return render json: VariantSerializer.new.serialize(@available_variants), status: :ok
+      return render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants), status: :ok
     end
 
-    render json: VariantSerializer.new.serialize(@available_variants.where(variants_filter_params)), status: :ok
+    render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants.where(variants_filter_params)), status: :ok
   end
 
   # POST /categories/{category}/products
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
 
     @product = Product.new(product_params)
     if @product.save
-      render json: ProductSerializer.new.serialize(@product), status: :created
+      render json: PankoSerializers::ProductSerializer.new.serialize(@product), status: :created
     else
       render json: { errors: @product.errors.full_messages },
              status: :unprocessable_entity
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
   # PUT /categories/{category}/products/{id}
   def update
     if @product.update(product_params)
-      render json: ProductSerializer.new.serialize(@product), status: :ok
+      render json: PankoSerializers::ProductSerializer.new.serialize(@product), status: :ok
     else
       render json: { errors: @product.errors.full_messages },
              status: :unprocessable_entity

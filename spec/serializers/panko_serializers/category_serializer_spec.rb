@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe CategorySerializer, type: :serializer do
+RSpec.describe PankoSerializers::CategorySerializer, type: :serializer do
   include Rails.application.routes.url_helpers
 
   describe '.serializable_hash' do

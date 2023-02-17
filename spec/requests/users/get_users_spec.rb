@@ -15,7 +15,8 @@ RSpec.describe 'Users', type: :request do
       let(:headers) { user_auth_header(user) }
       let(:users_per_page) { Pagy::DEFAULT[:items] }
       let(:users_json) do
-        JSON.parse(Panko::ArraySerializer.new(User.first(users_per_page), each_serializer: UserSerializer).to_json)
+        JSON.parse(Panko::ArraySerializer.new(User.first(users_per_page),
+                                              each_serializer: PankoSerializers::UserSerializer).to_json)
       end
 
       it 'returns a valid JSON' do
