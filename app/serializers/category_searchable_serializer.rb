@@ -1,15 +1,17 @@
 class CategorySearchableSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attribute :id do
+  attributes :id, :title, :imageUrl
+
+  def id
     object.searchable_id
   end
 
-  attribute :title do
+  def title
     object.content
   end
 
-  attribute :imageUrl do
-    url_for object.searchable.image
+  def imageUrl
+    url_for object.searchable.image if object.searchable.image.attached?
   end
 end

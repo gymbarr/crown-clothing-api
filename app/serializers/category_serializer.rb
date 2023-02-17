@@ -1,13 +1,9 @@
-class CategorySerializer < ActiveModel::Serializer
+class CategorySerializer < Panko::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :title
+  attributes :id, :title, :imageUrl
 
-  attribute :imageUrl, if: :image_attached? do
-    url_for object.image
-  end
-
-  def image_attached?
-    object.image.attached?
+  def imageUrl
+    url_for object.image if object.image.attached?
   end
 end

@@ -16,10 +16,10 @@ class PgSearchResultsController < ApplicationController
       response_time = (performance.real * 1000).round(2)
 
       render json: {
-        categories: ActiveModelSerializers::SerializableResource.new(@categories_searchable,
-                                                                     each_serializer: CategorySearchableSerializer),
-        products: ActiveModelSerializers::SerializableResource.new(@products_searchable,
-                                                                   each_serializer: ProductSearchableSerializer),
+        categories: Panko::ArraySerializer.new(@categories_searchable, each_serializer: CategorySearchableSerializer)
+                                          .to_json,
+        products: Panko::ArraySerializer.new(@products_searchable, each_serializer: ProductSearchableSerializer)
+                                        .to_json,
         performance: response_time,
         pagy: pagy_metadata(@pagy)
       }, status: :ok
