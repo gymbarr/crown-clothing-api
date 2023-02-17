@@ -20,7 +20,8 @@ class Product < ApplicationRecord
       type: self.class,
       title:,
       price:,
-      imageUrl: (url_for(self.image) if self.image.attached?)
+      imageUrl: (url_for(image) if image.attached?),
+      category: category.title
     }
   end
 end

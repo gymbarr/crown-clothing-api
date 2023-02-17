@@ -1,4 +1,4 @@
-class ProductSearchableSerializer < Panko::Serializer
+class ProductPgSearchableSerializer < Panko::Serializer
   include Rails.application.routes.url_helpers
 
   attributes :id, :title, :category, :price, :imageUrl
