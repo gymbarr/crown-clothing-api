@@ -7,7 +7,7 @@ class CategoriesController < ApplicationController
     authorize(Category)
 
     @categories = Category.all
-    render json: Panko::ArraySerializer.new(@categories, each_serializer: CategorySerializer).to_json, status: :ok
+    render json: Panko::ArraySerializer.new(@categories, each_serializer: CategorySerializer).to_a, status: :ok
   end
 
   # GET /categories/{category}

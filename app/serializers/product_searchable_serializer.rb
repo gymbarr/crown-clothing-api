@@ -1,23 +1,25 @@
-class ProductSearchableSerializer < ActiveModel::Serializer
+class ProductSearchableSerializer < Panko::Serializer
   include Rails.application.routes.url_helpers
 
-  attribute :id do
+  attributes :id, :title, :category, :price, :imageUrl
+
+  def id
     object.searchable_id
   end
 
-  attribute :title do
+  def title
     object.content
   end
 
-  attribute :category do
+  def category
     object.searchable.category
   end
 
-  attribute :price do
+  def price
     object.searchable.price
   end
 
-  attribute :imageUrl do
-    url_for object.searchable.image
+  def imageUrl
+    url_for object.searchable.image if object.searchable.image.attached?
   end
 end

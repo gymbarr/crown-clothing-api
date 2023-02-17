@@ -1,7 +1,7 @@
 require 'benchmark'
-include Benchmark
 
 class PgSearchResultsController < ApplicationController
+  include Benchmark
   skip_after_action :verify_authorized
 
   def index
@@ -17,9 +17,9 @@ class PgSearchResultsController < ApplicationController
 
       render json: {
         categories: Panko::ArraySerializer.new(@categories_searchable, each_serializer: CategorySearchableSerializer)
-                                          .to_json,
+                                          .to_a,
         products: Panko::ArraySerializer.new(@products_searchable, each_serializer: ProductSearchableSerializer)
-                                        .to_json,
+                                        .to_a,
         performance: response_time,
         pagy: pagy_metadata(@pagy)
       }, status: :ok

@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
     pagy_headers_merge(@pagy)
 
     render json: {
-      products: ActiveModelSerializers::SerializableResource.new(@products),
+      products: Panko::ArraySerializer.new(@products, each_serializer: ProductSerializer).to_a,
       filters: {
         colors: @available_colors,
         sizes: @available_sizes
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
   # GET /categories/{category}/products/{id}
   def show
-    render json: @product, status: :ok
+    render json: ProductSerializer.new.serialize(@product), status: :ok
   end
 
   # GET /categories/{category}/products/{id}/show_variants
@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
 
     @product = Product.new(product_params)
     if @product.save
-      render json: @product, status: :created
+      render json: ProductSerializer.new.serialize(@product), status: :created
     else
       render json: { errors: @product.errors.full_messages },
              status: :unprocessable_entity
@@ -53,7 +53,7 @@ class ProductsController < ApplicationController
   # PUT /categories/{category}/products/{id}
   def update
     if @product.update(product_params)
-      render json: @product, status: :ok
+      render json: ProductSerializer.new.serialize(@product), status: :ok
     else
       render json: { errors: @product.errors.full_messages },
              status: :unprocessable_entity

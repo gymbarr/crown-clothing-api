@@ -9,7 +9,7 @@ RSpec.describe 'Products', type: :request do
     let(:params) { { items: products_per_page } }
     let(:products_per_page) { 2 }
     let(:products_json) do
-      JSON.parse(ActiveModelSerializers::SerializableResource.new(Product.last(products_per_page)).to_json)
+      JSON.parse(Panko::ArraySerializer.new(Product.last(products_per_page), each_serializer: ProductSerializer).to_json)
     end
 
     before do
