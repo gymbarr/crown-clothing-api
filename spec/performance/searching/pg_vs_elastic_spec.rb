@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Searching methods performance', type: :performance do
+RSpec.describe 'Searching methods performance comparison', type: :performance do
   let(:category) { create :category }
 
   before do
@@ -12,7 +12,7 @@ RSpec.describe 'Searching methods performance', type: :performance do
     Product.reindex
   end
 
-  it 'compares the searching methods' do
+  it 'shows that elastic search is faster' do
     10.times do
       query = ('a'..'z').to_a.sample
       p query

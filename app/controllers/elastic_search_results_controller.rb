@@ -19,11 +19,13 @@ class ElasticSearchResultsController < ApplicationController
     @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })
     response_time = (performance.real * 1000).round(2)
 
-    render json: {
-      categories: @categories,
-      products: @products,
+    render json: Panko::Response.new(
+      categories: Panko::ArraySerializer.new(@categories,
+                                             each_serializer: PankoSerializers::CategoryElasticSearchableSerializer),
+      products: Panko::ArraySerializer.new(@products,
+                                           each_serializer: PankoSerializers::ProductElasticSearchableSerializer),
       performance: response_time,
       pagy: pagy_metadata(@pagy)
-    }, status: :ok
+    ), status: :ok
   end
 end

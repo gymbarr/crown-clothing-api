@@ -7,12 +7,14 @@ class CategoriesController < ApplicationController
     authorize(Category)
 
     @categories = Category.all
-    render json: @categories, status: :ok
+    render json: Panko::Response.new(
+      Panko::ArraySerializer.new(@categories, each_serializer: PankoSerializers::CategorySerializer)
+    ), status: :ok
   end
 
   # GET /categories/{category}
   def show
-    render json: @category, status: :ok
+    render json: PankoSerializers::CategorySerializer.new.serialize(@category), status: :ok
   end
 
   # POST /categories
@@ -21,7 +23,7 @@ class CategoriesController < ApplicationController
 
     @category = Category.new(category_params)
     if @category.save
-      render json: @category, status: :created
+      render json: PankoSerializers::CategorySerializer.new.serialize(@category), status: :created
     else
       render json: { errors: @category.errors.full_messages },
              status: :unprocessable_entity
@@ -31,7 +33,7 @@ class CategoriesController < ApplicationController
   # PUT /categories/{title}
   def update
     if @category.update(category_params)
-      render json: @category, status: :ok
+      render json: PankoSerializers::CategorySerializer.new.serialize(@category), status: :ok
     else
       render json: { errors: @category.errors.full_messages },
              status: :unprocessable_entity

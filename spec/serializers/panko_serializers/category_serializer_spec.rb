@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe CategorySerializer, type: :serializer do
+RSpec.describe PankoSerializers::CategorySerializer, type: :serializer do
   include Rails.application.routes.url_helpers
 
   describe '.serializable_hash' do
-    subject(:category_serializer) { described_class.new(category).serializable_hash }
+    subject(:category_serializer) { described_class.new.serialize(category).symbolize_keys }
 
     let(:category) { create :category }
 

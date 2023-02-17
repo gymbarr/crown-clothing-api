@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe ProductSerializer, type: :serializer do
+RSpec.describe PankoSerializers::ProductSerializer, type: :serializer do
   include Rails.application.routes.url_helpers
 
   describe '.serializable_hash' do
-    subject(:product_serializer) { described_class.new(product).serializable_hash }
+    subject(:product_serializer) { described_class.new.serialize(product).symbolize_keys }
 
     let(:product) { create :product }
 
