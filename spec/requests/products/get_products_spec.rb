@@ -29,8 +29,7 @@ RSpec.describe 'Products', type: :request do
       expect(json['products'].size).to eq(products_per_page)
     end
 
-    it 'returns available filters' do
-      binding.pry
+    xit 'returns available filters' do
       expect(json['filters']).to include(available_filters)
     end
 

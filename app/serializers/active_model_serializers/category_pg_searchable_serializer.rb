@@ -9,9 +9,5 @@ module ActiveModelSerializers
     attribute :title do
       object.content
     end
-
-    attribute :imageUrl do
-      url_for object.searchable.image
-    end
   end
 end

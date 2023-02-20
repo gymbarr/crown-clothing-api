@@ -11,9 +11,5 @@ module PankoSerializers
     def title
       object.content
     end
-
-    def imageUrl
-      url_for object.searchable.image if object.searchable.image.attached?
-    end
   end
 end

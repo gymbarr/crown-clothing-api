@@ -11,7 +11,7 @@ module ActiveModelSerializers
     end
 
     attribute :category do
-      object.searchable.category
+      object.searchable.category.title
     end
 
     attribute :price do
@@ -19,7 +19,7 @@ module ActiveModelSerializers
     end
 
     attribute :imageUrl do
-      url_for object.searchable.image
+      url_for object.searchable.image if object.searchable.image.attached?
     end
   end
 end

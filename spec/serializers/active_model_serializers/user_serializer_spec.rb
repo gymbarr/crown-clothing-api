@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe PankoSerializers::UserSerializer, type: :serializer do
-  describe '.serialize' do
-    subject(:user_serializer) { described_class.new.serialize(user).symbolize_keys }
+RSpec.describe ActiveModelSerializers::UserSerializer, type: :serializer do
+  describe '.serializable_hash' do
+    subject(:user_serializer) { described_class.new(user).serializable_hash }
 
     let(:user) { create :user }
 
