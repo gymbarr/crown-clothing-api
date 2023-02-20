@@ -4,6 +4,7 @@ class PgSearchResultsController < ApplicationController
   include Benchmark
   skip_after_action :verify_authorized
 
+  # GET /pg_search_results
   def index
     ActiveRecord::Base.uncached do
       performance = Benchmark.measure do

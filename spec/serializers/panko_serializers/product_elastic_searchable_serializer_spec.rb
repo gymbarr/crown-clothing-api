@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PankoSerializers::ProductElasticSearchableSerializer, type: :serializer do
-  describe '.serializable_hash' do
+  describe '.serialize' do
     subject(:product_elastic_searchable_serializer) do
       described_class.new.serialize(product_elastic_searchable).symbolize_keys
     end

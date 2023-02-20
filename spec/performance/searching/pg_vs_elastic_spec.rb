@@ -6,8 +6,8 @@ RSpec.describe 'Searching methods performance comparison', type: :performance do
   before do
     create_list(:product, 1000, category:)
 
-    PgSearch::Multisearch.rebuild(Category, clean_up: false)
-    PgSearch::Multisearch.rebuild(Product, clean_up: false)
+    PgSearch::Multisearch.rebuild(Category)
+    PgSearch::Multisearch.rebuild(Product)
     Category.reindex
     Product.reindex
   end

@@ -1,8 +1,6 @@
 module PankoSerializers
   class CategoryPgSearchableSerializer < Panko::Serializer
-    include Rails.application.routes.url_helpers
-
-    attributes :id, :title, :imageUrl
+    attributes :id, :title
 
     def id
       object.searchable_id
