@@ -33,10 +33,14 @@ class ProductsController < ApplicationController
   def show_variants
     @available_variants = @product.variants
     if variants_filter_params.blank?
-      return render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants), status: :ok
+      return render json: Panko::Response.new(
+        Panko::ArraySerializer.new(@available_variants, each_serializer: PankoSerializers::VariantSerializer)
+      ), status: :ok
     end
 
-    render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants.where(variants_filter_params)), status: :ok
+    render json: Panko::Response.new(
+      Panko::ArraySerializer.new(@available_variants.where(variants_filter_params), each_serializer: PankoSerializers::VariantSerializer)
+    ), status: :ok
   end
 
   # POST /categories/{category}/products

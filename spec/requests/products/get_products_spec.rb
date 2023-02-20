@@ -6,10 +6,17 @@ RSpec.describe 'Products', type: :request do
 
     let(:category) { create :category }
     let!(:products) { create_list :product, 10, category: category }
+    let!(:variants) { create_list :variant, 10 }
+    let(:available_filters) do
+      {
+        colors: variants.pluck(:color).uniq,
+        sizes: variants.pluck(:size).uniq
+      }
+    end
     let(:params) { { items: products_per_page } }
     let(:products_per_page) { 2 }
     let(:products_json) do
-      JSON.parse(Panko::ArraySerializer.new(Product.last(products_per_page),
+      JSON.parse(Panko::ArraySerializer.new(category.products.last(products_per_page),
                                             each_serializer: PankoSerializers::ProductSerializer).to_json)
     end
 
@@ -20,6 +27,11 @@ RSpec.describe 'Products', type: :request do
     it 'returns products of the first page' do
       expect(json['products']).to match_array(products_json)
       expect(json['products'].size).to eq(products_per_page)
+    end
+
+    it 'returns available filters' do
+      binding.pry
+      expect(json['filters']).to include(available_filters)
     end
 
     it 'returns ok status' do
