@@ -8,8 +8,8 @@ class ProductsController < ApplicationController
     authorize(Product)
 
     @products = @category.products.includes(:variants)
-    @available_colors = @products.pluck(:color).uniq
-    @available_sizes = @products.pluck(:size).uniq.sort
+    @available_colors = @products.distinct.pluck(:color)
+    @available_sizes = @products.distinct.pluck(:size).sort
     @products = @products.where(variants: products_filters_params) if products_filters_params.present?
 
     @pagy, @products = pagy(@products.order(created_at: :desc), items: params[:items])

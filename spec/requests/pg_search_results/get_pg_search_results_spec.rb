@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'PgSearchResults', type: :request do
   include Rails.application.routes.url_helpers
+  Rails.application.routes.default_url_options = { host: 'localhost', port: '3000' }
 
   describe 'GET /api/pg_search_results' do
     subject(:get_pg_search_results_request) { get '/api/pg_search_results', params: }
@@ -11,7 +12,7 @@ RSpec.describe 'PgSearchResults', type: :request do
 
     before do
       PgSearch::Multisearch.rebuild(Category)
-      PgSearch::Multisearch.rebuild(Product, clean_up: false)
+      PgSearch::Multisearch.rebuild(Product)
       get_pg_search_results_request
     end
 
@@ -33,7 +34,6 @@ RSpec.describe 'PgSearchResults', type: :request do
       end
 
       it 'returns founded products' do
-        binding.pry
         expect(json['products'][0]).to eq(product_searchable)
       end
     end

@@ -14,6 +14,7 @@ FactoryBot.define do
         create_list(:variant, variants_count)
       end
     end
+
     after(:build) do |product|
       product.image.attach(io: Rails.root.join('app/assets/images/products/hats/brown-brim.png').open,
                            filename: 'brown-brim.png',
