@@ -1,5 +1,5 @@
 module PankoSerializers
   class CategoryElasticSearchableSerializer < Panko::Serializer
-    attributes :title
+    attributes :id, :title
   end
 end

@@ -13,7 +13,7 @@ module PankoSerializers
     end
 
     def category
-      object.searchable.category
+      object.searchable.category.title
     end
 
     def price

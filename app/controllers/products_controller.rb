@@ -8,8 +8,8 @@ class ProductsController < ApplicationController
     authorize(Product)
 
     @products = @category.products.includes(:variants)
-    @available_colors = @products.pluck(:color).uniq
-    @available_sizes = @products.pluck(:size).uniq.sort
+    @available_colors = @products.distinct.pluck(:color)
+    @available_sizes = @products.distinct.pluck(:size).sort
     @products = @products.where(variants: products_filters_params) if products_filters_params.present?
 
     @pagy, @products = pagy(@products.order(created_at: :desc), items: params[:items])
@@ -33,10 +33,14 @@ class ProductsController < ApplicationController
   def show_variants
     @available_variants = @product.variants
     if variants_filter_params.blank?
-      return render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants), status: :ok
+      return render json: Panko::Response.new(
+        Panko::ArraySerializer.new(@available_variants, each_serializer: PankoSerializers::VariantSerializer)
+      ), status: :ok
     end
 
-    render json: PankoSerializers::VariantSerializer.new.serialize(@available_variants.where(variants_filter_params)), status: :ok
+    render json: Panko::Response.new(
+      Panko::ArraySerializer.new(@available_variants.where(variants_filter_params), each_serializer: PankoSerializers::VariantSerializer)
+    ), status: :ok
   end
 
   # POST /categories/{category}/products

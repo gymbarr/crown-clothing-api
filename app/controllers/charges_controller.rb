@@ -1,7 +1,7 @@
 class ChargesController < ApplicationController
-  skip_after_action :verify_authorized
-
   def create
+    authorize(:charge, :create?)
+
     session = Stripe::Checkout::Session.create({
                                                  customer_email: @current_user.email,
                                                  payment_method_types: ['card'],
@@ -10,14 +10,14 @@ class ChargesController < ApplicationController
                                                      currency: 'usd',
                                                      unit_amount: params[:amount],
                                                      product_data: {
-                                                       name: 'Crown clothing',
+                                                       name: 'Crown clothing'
                                                      }
                                                    },
                                                    quantity: 1
                                                  }],
                                                  mode: 'payment',
                                                  success_url: "#{params[:back_url]}?success=true",
-                                                 cancel_url: "#{params[:back_url]}?canceled=true",
+                                                 cancel_url: "#{params[:back_url]}?canceled=true"
                                                })
 
     render json: { session: session.url }, status: :created

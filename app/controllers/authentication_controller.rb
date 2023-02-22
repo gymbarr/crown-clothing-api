@@ -1,8 +1,8 @@
 class AuthenticationController < ApplicationController
-  skip_after_action :verify_authorized
-
   # POST /auth/login
   def login
+    authorize(:authentication, :login?)
+
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
       token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)

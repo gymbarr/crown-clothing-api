@@ -1,5 +1,11 @@
 module ActiveModelSerializers
   class CategoryElasticSearchableSerializer < ActiveModel::Serializer
-    attributes :title
+    attribute :id do
+      object.id
+    end
+
+    attribute :title do
+      object.title
+    end
   end
 end
