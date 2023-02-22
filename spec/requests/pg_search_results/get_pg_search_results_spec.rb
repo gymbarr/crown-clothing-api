@@ -4,8 +4,8 @@ RSpec.describe 'PgSearchResults', type: :request do
   describe 'GET /api/pg_search_results' do
     subject(:get_pg_search_results_request) { get '/api/pg_search_results', params: }
 
-    let!(:category) { create :category, title: 'some_category' }
-    let!(:product) { create :product, category:, title: 'some_product' }
+    let!(:category) { create(:category, title: 'some_category') }
+    let!(:product) { create(:product, category:, title: 'some_product') }
     let(:category_searchable) { { 'id' => category.id, 'title' => category.title } }
     let(:product_searchable) do
       {

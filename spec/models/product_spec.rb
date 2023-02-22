@@ -4,13 +4,13 @@ require 'models/shared_examples/validation_spec'
 RSpec.describe Product, type: :model do
   describe 'validations' do
     context 'when valid attributes' do
-      subject(:product) { build :category }
+      subject(:product) { build(:category) }
 
       include_examples 'valid object'
     end
 
     context 'when invalid attributes' do
-      subject(:product) { build :product, **attrs }
+      subject(:product) { build(:product, **attrs) }
 
       let(:attrs) { { title: nil } }
 
@@ -24,9 +24,9 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'associations' do
-    subject(:product) { create :product, category: category }
+    subject(:product) { create(:product, category:) }
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     it 'has category' do
       expect(product.category).to eq(category)

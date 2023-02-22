@@ -16,7 +16,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with valid parameters' do
-      let(:params) { attributes_for :user }
+      let(:params) { attributes_for(:user) }
 
       it 'calls the service' do
         expect(service).to have_received(:call)
@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:params) { attributes_for :user, **attrs }
+      let(:params) { attributes_for(:user, **attrs) }
 
       it_behaves_like 'with errors' do
         let(:attrs) { { username: nil } }

@@ -4,7 +4,7 @@ RSpec.describe 'Categories', type: :request do
   describe 'GET /api/categories/:category_title' do
     subject(:get_category_request) { get "/api/categories/#{category.title}" }
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     before do
       get_category_request

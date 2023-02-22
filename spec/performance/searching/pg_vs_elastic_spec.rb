@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Searching methods performance comparison', type: :performance do
-  let(:category) { create :category }
+  let(:category) { create(:category) }
 
   before do
     create_list(:product, 1000, category:)

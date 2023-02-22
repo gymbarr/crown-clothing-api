@@ -8,7 +8,7 @@ RSpec.describe ActiveModelSerializers::ProductPgSearchableSerializer, type: :ser
       described_class.new(product_pg_searchable).serializable_hash
     end
 
-    let(:product) { create :product }
+    let(:product) { create(:product) }
     let(:product_pg_searchable) { PgSearch.multisearch(product.title)[0] }
 
     it 'returns correct keys and values' do

@@ -4,8 +4,8 @@ RSpec.describe 'Products', type: :request do
   describe 'GET /api/categories/:category_title/products/:id' do
     subject(:get_product_request) { get "/api/categories/#{category.title}/products/#{product.id}" }
 
-    let(:category) { create :category }
-    let(:product) { create :product, category: category }
+    let(:category) { create(:category) }
+    let(:product) { create(:product, category:) }
 
     before do
       get_product_request

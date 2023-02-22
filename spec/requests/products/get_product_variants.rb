@@ -6,9 +6,9 @@ RSpec.describe 'Products', type: :request do
       get "/api/categories/#{category.title}/products/#{product.id}/show_variants", params:
     end
 
-    let(:category) { create :category }
-    let!(:product) { create :product, category: }
-    let!(:filtered_variants) { create_list :variant, 3, color: 'some_color', product: }
+    let(:category) { create(:category) }
+    let!(:product) { create(:product, category:) }
+    let!(:filtered_variants) { create_list(:variant, 3, color: 'some_color', product:) }
 
     before do
       create_list(:variant, 5, product:)

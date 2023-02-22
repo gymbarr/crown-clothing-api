@@ -4,7 +4,7 @@ RSpec.describe Authorization::JsonWebTokenDecoder, type: :service do
   describe '.call' do
     subject(:decoded) { described_class.call(token) }
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:token) { Authorization::JsonWebTokenEncoder.call(user_id: user.id) }
 
     it 'returns a hash' do

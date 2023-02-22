@@ -6,7 +6,7 @@ RSpec.describe ActiveModelSerializers::CategorySerializer, type: :serializer do
   describe '.serializable_hash' do
     subject(:category_serializer) { described_class.new(category).serializable_hash }
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     it 'returns correct keys and values' do
       expect(category_serializer).to include(

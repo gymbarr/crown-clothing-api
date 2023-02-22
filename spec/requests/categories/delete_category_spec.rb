@@ -8,14 +8,14 @@ RSpec.describe 'Categories', type: :request do
       delete "/api/categories/#{category.title}", headers:
     end
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     before do
       delete_category_request
     end
 
     context 'when authorized user' do
-      let(:user) { create :user, :with_admin_role }
+      let(:user) { create(:user, :with_admin_role) }
       let(:headers) { user_auth_header(user) }
 
       it 'decrements the count of categories by 1' do

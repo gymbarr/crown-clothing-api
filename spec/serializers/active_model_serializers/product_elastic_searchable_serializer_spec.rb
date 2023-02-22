@@ -6,7 +6,7 @@ RSpec.describe ActiveModelSerializers::ProductElasticSearchableSerializer, type:
       described_class.new(product_elastic_searchable).serializable_hash
     end
 
-    let!(:product) { create :product }
+    let!(:product) { create(:product) }
     let(:product_elastic_searchable) do
       Searchkick.search(
         product.title,

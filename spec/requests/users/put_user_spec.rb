@@ -10,7 +10,7 @@ RSpec.describe 'Users', type: :request do
           headers:
     end
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
 
     before do
       put_user_request
@@ -20,7 +20,7 @@ RSpec.describe 'Users', type: :request do
       let(:headers) { user_auth_header(user) }
 
       context 'with valid parameters' do
-        let(:new_params) { attributes_for :user }
+        let(:new_params) { attributes_for(:user) }
 
         it 'changes the user username' do
           expect(user.reload.username).to eq(new_params[:username])
@@ -40,7 +40,7 @@ RSpec.describe 'Users', type: :request do
       end
 
       context 'with invalid parameters' do
-        let(:new_params) { attributes_for :user, **attrs }
+        let(:new_params) { attributes_for(:user, **attrs) }
 
         it_behaves_like 'with errors' do
           let(:attrs) { { username: nil } }
@@ -63,7 +63,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     context 'when unauthorized user' do
-      let(:new_params) { attributes_for :user }
+      let(:new_params) { attributes_for(:user) }
 
       include_examples 'not authorized'
     end

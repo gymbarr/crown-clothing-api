@@ -6,7 +6,7 @@ RSpec.describe PankoSerializers::ProductSerializer, type: :serializer do
   describe '.serialize' do
     subject(:product_serializer) { described_class.new.serialize(product).symbolize_keys }
 
-    let(:product) { create :product }
+    let(:product) { create(:product) }
 
     it 'returns correct keys and values' do
       expect(product_serializer).to include(

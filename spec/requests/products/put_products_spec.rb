@@ -10,20 +10,20 @@ RSpec.describe 'Products', type: :request do
           headers:
     end
 
-    let(:category) { create :category }
-    let(:product) { create :product, category: }
-    let(:new_category) { create :category }
+    let(:category) { create(:category) }
+    let(:product) { create(:product, category:) }
+    let(:new_category) { create(:category) }
 
     before do
       put_product_request
     end
 
     context 'when authorized user' do
-      let(:user) { create :user, :with_admin_role }
+      let(:user) { create(:user, :with_admin_role) }
       let(:headers) { user_auth_header(user) }
 
       context 'with valid parameters' do
-        let(:new_params) { attributes_for :product, category_id: new_category.id }
+        let(:new_params) { attributes_for(:product, category_id: new_category.id) }
 
         it 'changes the product title' do
           expect(product.reload.title).to eq(new_params[:title])
@@ -43,7 +43,7 @@ RSpec.describe 'Products', type: :request do
       end
 
       context 'with invalid parameters' do
-        let(:new_params) { attributes_for :product, **attrs }
+        let(:new_params) { attributes_for(:product, **attrs) }
 
         it_behaves_like 'with errors' do
           let(:attrs) { { title: nil } }
@@ -60,7 +60,7 @@ RSpec.describe 'Products', type: :request do
     end
 
     context 'when unauthorized user' do
-      let(:new_params) { attributes_for :product }
+      let(:new_params) { attributes_for(:product) }
 
       include_examples 'not authorized'
     end

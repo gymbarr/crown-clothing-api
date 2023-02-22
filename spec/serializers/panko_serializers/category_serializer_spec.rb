@@ -6,7 +6,7 @@ RSpec.describe PankoSerializers::CategorySerializer, type: :serializer do
   describe '.serialize' do
     subject(:category_serializer) { described_class.new.serialize(category).symbolize_keys }
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     it 'returns correct keys and values' do
       expect(category_serializer).to include(

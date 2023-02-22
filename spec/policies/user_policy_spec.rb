@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe UserPolicy do
   subject { described_class.new(user, user_record) }
 
-  let(:user_record) { create :user }
+  let(:user_record) { create(:user) }
 
   context 'when the user is an administrator' do
-    let(:user) { create :user, :with_admin_role }
+    let(:user) { create(:user, :with_admin_role) }
 
     it { is_expected.to permit_actions(%i[index show create update destroy me]) }
   end
@@ -20,7 +20,7 @@ RSpec.describe UserPolicy do
     end
 
     context 'when the user and the record user are different' do
-      let(:user) { create :user }
+      let(:user) { create(:user) }
 
       it { is_expected.to permit_actions(%i[create me]) }
       it { is_expected.to forbid_actions(%i[index show update destroy]) }

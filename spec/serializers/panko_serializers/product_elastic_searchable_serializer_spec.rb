@@ -6,7 +6,7 @@ RSpec.describe PankoSerializers::ProductElasticSearchableSerializer, type: :seri
       described_class.new.serialize(product_elastic_searchable).symbolize_keys
     end
 
-    let!(:product) { create :product }
+    let!(:product) { create(:product) }
     let(:product_elastic_searchable) do
       Searchkick.search(
         product.title,

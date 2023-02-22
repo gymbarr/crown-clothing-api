@@ -7,7 +7,7 @@ RSpec.describe 'Authentication', type: :request do
       post '/api/auth/login', params:
     end
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:token) { 'token' }
     let(:service) { Authorization::JsonWebTokenEncoder }
 

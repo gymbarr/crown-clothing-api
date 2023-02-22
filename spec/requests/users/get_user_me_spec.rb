@@ -5,7 +5,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET /api/user/me' do
     subject(:get_user_request) { get '/api/user/me', headers: }
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
 
     before do
       get_user_request
