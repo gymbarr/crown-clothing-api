@@ -39,4 +39,8 @@ class ApplicationPolicy
   def admin?
     @user&.has_role?(Role.admin_user_role)
   end
+
+  def logged_in?
+    !user.nil?
+  end
 end
