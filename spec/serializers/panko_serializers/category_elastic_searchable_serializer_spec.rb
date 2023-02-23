@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PankoSerializers::CategoryElasticSearchableSerializer, type: :serializer do
@@ -6,7 +8,7 @@ RSpec.describe PankoSerializers::CategoryElasticSearchableSerializer, type: :ser
       described_class.new.serialize(category_elastic_searchable).symbolize_keys
     end
 
-    let!(:category) { create :category }
+    let!(:category) { create(:category) }
     let(:category_elastic_searchable) do
       Searchkick.search(
         category.title,

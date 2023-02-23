@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ActiveModelSerializers::ProductSerializer, type: :serializer do
@@ -6,7 +8,7 @@ RSpec.describe ActiveModelSerializers::ProductSerializer, type: :serializer do
   describe '.serializable_hash' do
     subject(:product_serializer) { described_class.new(product).serializable_hash }
 
-    let(:product) { create :product }
+    let(:product) { create(:product) }
 
     it 'returns correct keys and values' do
       expect(product_serializer).to include(

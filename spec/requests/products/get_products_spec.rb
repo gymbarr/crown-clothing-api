@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Products', type: :request do
@@ -5,7 +7,7 @@ RSpec.describe 'Products', type: :request do
     subject(:get_products_request) { get "/api/categories/#{category.title}/products", params: }
 
     let(:params) { {} }
-    let(:category) { create :category, :with_products, products_count: 10, variants_per_product: 3 }
+    let(:category) { create(:category, :with_products, products_count: 10, variants_per_product: 3) }
     let(:products) { category.products.includes(:variants) }
     let(:available_filters) do
       {

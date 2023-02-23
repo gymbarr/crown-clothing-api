@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PankoSerializers::ProductPgSearchableSerializer, type: :serializer do
@@ -8,7 +10,7 @@ RSpec.describe PankoSerializers::ProductPgSearchableSerializer, type: :serialize
       described_class.new.serialize(product_pg_searchable).symbolize_keys
     end
 
-    let(:product) { create :product }
+    let(:product) { create(:product) }
     let(:product_pg_searchable) { PgSearch.multisearch(product.title)[0] }
 
     it 'returns correct keys and values' do

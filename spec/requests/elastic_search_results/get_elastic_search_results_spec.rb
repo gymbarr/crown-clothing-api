@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'ElasticSearchResults', type: :request do
   describe 'GET /api/elastic_search_results' do
     subject(:get_elastic_search_results_request) { get '/api/elastic_search_results', params: }
 
-    let!(:category) { create :category, title: 'some_category' }
-    let!(:product) { create :product, category:, title: 'some_product' }
+    let!(:category) { create(:category, title: 'some_category') }
+    let!(:product) { create(:product, category:, title: 'some_product') }
     let(:category_searchable) { { 'id' => category.id.to_s, 'title' => category.title } }
     let(:product_searchable) do
       {

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ActiveModelSerializers::CategoryElasticSearchableSerializer, type: :serializer do
@@ -6,7 +8,7 @@ RSpec.describe ActiveModelSerializers::CategoryElasticSearchableSerializer, type
       described_class.new(category_elastic_searchable).serializable_hash
     end
 
-    let!(:category) { create :category }
+    let!(:category) { create(:category) }
     let(:category_elastic_searchable) do
       Searchkick.search(
         category.title,

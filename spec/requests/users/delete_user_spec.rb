@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/not_authorized_spec'
 
@@ -7,7 +9,7 @@ RSpec.describe 'Users', type: :request do
       delete "/api/users/#{user.username}", headers:
     end
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
 
     before do
       delete_user_request

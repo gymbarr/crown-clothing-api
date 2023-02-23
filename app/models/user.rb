@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   VALID_USERNAME_REGEX = /\A[a-z][a-z0-9_-]*\z/i
   rolify

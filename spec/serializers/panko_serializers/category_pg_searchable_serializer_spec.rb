@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PankoSerializers::CategoryPgSearchableSerializer, type: :serializer do
@@ -8,7 +10,7 @@ RSpec.describe PankoSerializers::CategoryPgSearchableSerializer, type: :serializ
       described_class.new.serialize(category_pg_searchable).symbolize_keys
     end
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
     let(:category_pg_searchable) { PgSearch.multisearch(category.title)[0] }
 
     it 'returns correct keys and values' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe ActiveModelSerializers::VariantSerializer, type: :serializer do
@@ -6,7 +8,7 @@ RSpec.describe ActiveModelSerializers::VariantSerializer, type: :serializer do
   describe '.serializable_hash' do
     subject(:variant_serializer) { described_class.new(variant).serializable_hash }
 
-    let(:variant) { create :variant }
+    let(:variant) { create(:variant) }
 
     it 'returns correct keys and values' do
       expect(variant_serializer).to include(

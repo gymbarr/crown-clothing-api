@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveModelSerializers
   class ProductSerializer < ActiveModel::Serializer
     include Rails.application.routes.url_helpers

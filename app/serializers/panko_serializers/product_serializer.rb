@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PankoSerializers
   class ProductSerializer < Panko::Serializer
     include Rails.application.routes.url_helpers

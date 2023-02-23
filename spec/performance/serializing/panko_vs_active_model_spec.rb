@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Serializing performance comparison', type: :performance do
@@ -13,7 +15,7 @@ RSpec.describe 'Serializing performance comparison', type: :performance do
   end
 
   context 'when serializing many object' do
-    let(:products) { create_list :product, 100 }
+    let(:products) { create_list(:product, 100) }
 
     let(:panko_serializing) do
       Panko::ArraySerializer.new(products,

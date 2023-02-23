@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-require 'requests/shared_examples/not_authorized_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Products', type: :request do
@@ -8,15 +9,15 @@ RSpec.describe 'Products', type: :request do
       delete "/api/categories/#{category.title}/products/#{product.id}", headers:
     end
 
-    let(:category) { create :category }
-    let(:product) { create :product, category: category }
+    let(:category) { create(:category) }
+    let(:product) { create(:product, category:) }
 
     before do
       delete_product_request
     end
 
     context 'when authorized user' do
-      let(:user) { create :user, :with_admin_role }
+      let(:user) { create(:user, :with_admin_role) }
       let(:headers) { user_auth_header(user) }
 
       it 'decrements the count of products by 1' do

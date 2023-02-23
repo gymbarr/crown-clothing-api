@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/not_authorized_spec'
 
@@ -5,7 +7,7 @@ RSpec.describe 'Users', type: :request do
   describe 'GET /api/user/:username' do
     subject(:get_user_request) { get "/api/users/#{user.username}", headers: }
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
 
     before do
       get_user_request

@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'models/shared_examples/validation_spec'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
     context 'when valid attributes' do
-      subject(:user) { build :user }
+      subject(:user) { build(:user) }
 
       include_examples 'valid object'
     end
 
     context 'when invalid attributes' do
-      subject(:user) { build :user, **attrs }
+      subject(:user) { build(:user, **attrs) }
 
       let(:attrs) { { username: nil, email: nil, password: nil, roles: [] } }
 
@@ -33,9 +35,9 @@ RSpec.describe User, type: :model do
     end
 
     context 'when attributes are not unique' do
-      subject(:user) { build :user, **attrs }
+      subject(:user) { build(:user, **attrs) }
 
-      let(:another_user) { create :user }
+      let(:another_user) { create(:user) }
       let(:attrs) { { username: another_user.username, email: another_user.email } }
 
       it_behaves_like 'with errors' do
@@ -50,7 +52,7 @@ RSpec.describe User, type: :model do
     end
 
     context 'when invalid attributes on update' do
-      subject(:user) { create :user }
+      subject(:user) { create(:user) }
 
       it_behaves_like 'with errors on update' do
         let(:attr) { :roles }
@@ -60,9 +62,9 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    subject(:user) { create :user, roles: [role] }
+    subject(:user) { create(:user, roles: [role]) }
 
-    let(:role) { create :role }
+    let(:role) { create(:role) }
 
     it 'has roles' do
       expect(user.roles).to contain_exactly(role)

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe PankoSerializers::VariantSerializer, type: :serializer do
@@ -6,7 +8,7 @@ RSpec.describe PankoSerializers::VariantSerializer, type: :serializer do
   describe '.serialize' do
     subject(:variant_serializer) { described_class.new.serialize(variant).symbolize_keys }
 
-    let(:variant) { create :variant }
+    let(:variant) { create(:variant) }
 
     it 'returns correct keys and values' do
       expect(variant_serializer).to include(

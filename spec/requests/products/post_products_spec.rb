@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'
@@ -8,18 +10,18 @@ RSpec.describe 'Products', type: :request do
       post "/api/categories/#{category.title}/products", headers:, params:
     end
 
-    let(:category) { create :category }
+    let(:category) { create(:category) }
 
     before do
       post_products_request
     end
 
     context 'when authorized user' do
-      let(:user) { create :user, :with_admin_role }
+      let(:user) { create(:user, :with_admin_role) }
       let(:headers) { user_auth_header(user) }
 
       context 'with valid parameters' do
-        let(:params) { attributes_for :product, category_id: category.id }
+        let(:params) { attributes_for(:product, category_id: category.id) }
 
         it 'returns the product title' do
           expect(json['title']).to eq(params[:title])
@@ -39,7 +41,7 @@ RSpec.describe 'Products', type: :request do
       end
 
       context 'with invalid parameters' do
-        let(:params) { attributes_for :product, **attrs }
+        let(:params) { attributes_for(:product, **attrs) }
 
         it_behaves_like 'with errors' do
           let(:attrs) { { title: nil, category_id: category.id } }

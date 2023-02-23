@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/invalid_params_spec'
 
@@ -7,7 +9,7 @@ RSpec.describe 'Authentication', type: :request do
       post '/api/auth/login', params:
     end
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:token) { 'token' }
     let(:service) { Authorization::JsonWebTokenEncoder }
 

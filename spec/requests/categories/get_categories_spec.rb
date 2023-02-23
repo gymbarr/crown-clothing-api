@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Categories', type: :request do
   describe 'GET /api/categories' do
     subject(:get_categories_request) { get '/api/categories' }
 
-    let!(:categories) { create_list :category, 10 }
+    let!(:categories) { create_list(:category, 10) }
 
     before do
       get_categories_request

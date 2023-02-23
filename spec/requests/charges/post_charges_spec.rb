@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/not_authorized_spec'
 
@@ -7,9 +9,10 @@ RSpec.describe 'Charges', type: :request do
       post '/api/charges/create', headers:, params:
     end
 
-    let(:user) { create :user }
+    let(:user) { create(:user) }
     let(:stripe_checkout) { Stripe::Checkout::Session }
-    let(:session) { instance_double('Session') }
+    # let(:session) { instance_double(Session) }
+    let(:session) { double }
     let(:session_url) { 'session_url' }
     let(:params) { { amount: '50', back_url: 'http://www.localhost:3001/checkout' } }
 

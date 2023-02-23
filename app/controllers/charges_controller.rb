@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ChargesController < ApplicationController
+  # rubocop:disable Metrics/MethodLength
   def create
     authorize(:charge, :create?)
-
     session = Stripe::Checkout::Session.create({
                                                  customer_email: @current_user.email,
                                                  payment_method_types: ['card'],
@@ -24,4 +26,5 @@ class ChargesController < ApplicationController
   rescue Stripe => e
     render json: { errors: e.messages }, status: :bad_request
   end
+  # rubocop:enable Metrics/MethodLength
 end
