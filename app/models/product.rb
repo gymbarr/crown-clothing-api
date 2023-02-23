@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Product < ApplicationRecord
   include PgSearch::Model
   include Rails.application.routes.url_helpers

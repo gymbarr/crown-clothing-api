@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :variant do
     size { Faker::Number.between(from: 30, to: 48) }

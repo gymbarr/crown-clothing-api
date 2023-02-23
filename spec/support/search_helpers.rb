@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SearchHelpers
   def pg_search_query(query)
     PgSearch.multisearch(query)

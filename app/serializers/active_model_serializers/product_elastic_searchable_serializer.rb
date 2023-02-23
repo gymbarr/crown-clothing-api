@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActiveModelSerializers
   class ProductElasticSearchableSerializer < ActiveModel::Serializer
     attribute :id do

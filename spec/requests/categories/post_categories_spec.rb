@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 require 'requests/shared_examples/invalid_params_spec'
 require 'requests/shared_examples/not_authorized_spec'

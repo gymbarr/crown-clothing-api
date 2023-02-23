@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
-require 'requests/shared_examples/not_authorized_spec'
 require 'requests/shared_examples/not_authorized_spec'
 
 RSpec.describe 'Categories', type: :request do

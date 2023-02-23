@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   before_action :find_category
   before_action :find_product, except: %i[create index]

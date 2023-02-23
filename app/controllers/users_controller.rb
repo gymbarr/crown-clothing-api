@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   before_action :find_user, except: %i[create index me]
   before_action :authorize_user!, except: %i[create index me]

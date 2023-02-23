@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < ApplicationController
   before_action :find_category, except: %i[create index]
   before_action :authorize_category!, except: %i[create index]

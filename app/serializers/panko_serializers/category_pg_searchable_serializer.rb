@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module PankoSerializers
   class CategoryPgSearchableSerializer < Panko::Serializer
     attributes :id, :title

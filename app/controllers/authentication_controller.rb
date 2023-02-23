@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AuthenticationController < ApplicationController
   # POST /auth/login
   def login
