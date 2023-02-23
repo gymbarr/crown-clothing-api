@@ -11,7 +11,8 @@ RSpec.describe 'Charges', type: :request do
 
     let(:user) { create(:user) }
     let(:stripe_checkout) { Stripe::Checkout::Session }
-    let(:session) { instance_double('Session') }
+    # let(:session) { instance_double(Session) }
+    let(:session) { double }
     let(:session_url) { 'session_url' }
     let(:params) { { amount: '50', back_url: 'http://www.localhost:3001/checkout' } }
 

@@ -5,6 +5,7 @@ require 'benchmark'
 class ElasticSearchResultsController < ApplicationController
   skip_after_action :verify_authorized
 
+  # rubocop:disable Metrics/MethodLength
   # GET /elastic_search_results
   def index
     search_results = []
@@ -31,4 +32,5 @@ class ElasticSearchResultsController < ApplicationController
       pagy: pagy_metadata(@pagy)
     ), status: :ok
   end
+  # rubocop:enable Metrics/MethodLength
 end

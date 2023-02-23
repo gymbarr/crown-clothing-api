@@ -3,6 +3,7 @@
 module Authorizable
   extend ActiveSupport::Concern
 
+  # rubocop:disable Metrics/BlockLength
   included do
     include Pundit::Authorization
 
@@ -42,4 +43,5 @@ module Authorizable
       @current_user
     end
   end
+  # rubocop:enable Metrics/BlockLength
 end

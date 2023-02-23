@@ -11,7 +11,7 @@ module Authorization
 
     def call
       decoded = JWT.decode(@token, SECRET_KEY)[0]
-      HashWithIndifferentAccess.new decoded
+      ActiveSupport::HashWithIndifferentAccess.new decoded
     end
   end
 end

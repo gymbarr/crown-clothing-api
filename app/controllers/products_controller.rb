@@ -41,7 +41,8 @@ class ProductsController < ApplicationController
     end
 
     render json: Panko::Response.new(
-      Panko::ArraySerializer.new(@available_variants.where(variants_filter_params), each_serializer: PankoSerializers::VariantSerializer)
+      Panko::ArraySerializer.new(@available_variants.where(variants_filter_params),
+                                 each_serializer: PankoSerializers::VariantSerializer)
     ), status: :ok
   end
 

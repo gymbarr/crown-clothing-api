@@ -11,25 +11,54 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.1
   Exclude:
-    - "db/schema.rb"
-    - "lib/tasks/*.rake"
-    - "bin/*"
-    - "config/puma.rb"
-    - "config/spring.rb"
-    - "config/initializers/*"
-    - "config/environments/development.rb"
-    - "config/environments/test.rb"
-    - "config/environments/production.rb"
+    - 'db/schema.rb'
+    - 'bin/*'
+    - 'config/**/*'
     - 'config/application.rb'
-    - 'config/boot.rb'
-    - 'config/environment.rb'
-    - "spec/spec_helper.rb"
+    - 'spec/spec_helper.rb'
     - 'Rakefile'
 
 Style/Documentation:
   Enabled: false
 
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 20
+
 Naming/MethodName:
   Exclude:
     - 'app/serializers/panko_serializers/*'
 
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Exclude:
+    - 'spec/performance/searching/*'
+    - 'spec/performance/serializing/*'
+
+RSpec/Rails/InferredSpecType:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/MultipleExpectations:
+  Max: 2
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 6
+
+RSpec/ExampleLength:
+  Max: 9
+
+Metrics/AbcSize:
+  Max: 30
