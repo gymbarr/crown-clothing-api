@@ -9,6 +9,9 @@ class ElasticSearchResultsController < ApplicationController
   # GET /elastic_search_results
   def index
     search_results = []
+    @categories = []
+    @products = []
+
     performance = Benchmark.measure do
       search_results = Searchkick.search(
         params[:query],
@@ -17,10 +20,18 @@ class ElasticSearchResultsController < ApplicationController
         load: false,
         misspellings: false
       )
+
+      search_results.each do |result|
+        if result.type == 'Category'
+          @categories << result
+        elsif result.type == 'Product'
+          @products << result
+        end
+      end
+
+      @pagy, @products = pagy_array(@products)
     end
 
-    @categories = search_results.select { |result| result.type == 'Category' }
-    @pagy, @products = pagy_array(search_results.select { |result| result.type == 'Product' })
     response_time = (performance.real * 1000).round(2)
 
     render json: Panko::Response.new(
