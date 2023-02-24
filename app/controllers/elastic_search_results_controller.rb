@@ -22,9 +22,10 @@ class ElasticSearchResultsController < ApplicationController
       )
 
       search_results.each do |result|
-        if result.type == 'Category'
+        case result.type
+        when 'Category'
           @categories << result
-        elsif result.type == 'Product'
+        when 'Product'
           @products << result
         end
       end

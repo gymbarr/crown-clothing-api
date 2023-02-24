@@ -82,7 +82,7 @@ performance = Benchmark.measure do
   hats.image.attach(io: Rails.root.join('app/assets/images/categories/hats.png').open, filename: 'hats.png',
                     content_type: 'image/png')
   jackets.image.attach(io: Rails.root.join('app/assets/images/categories/jackets.png').open, filename: 'jackets.png',
-                      content_type: 'image/png')
+                       content_type: 'image/png')
   sneakers.image.attach(io: Rails.root.join('app/assets/images/categories/sneakers.png').open, filename: 'sneakers.png',
                         content_type: 'image/png')
   womens.image.attach(io: Rails.root.join('app/assets/images/categories/womens.png').open, filename: 'womens.png',
@@ -155,4 +155,4 @@ performance = Benchmark.measure do
   Product.reindex
 end
 
-puts "seeds were completed in #{performance.real} seconds"
+Rails.logger.debug { "Completed in #{performance.real} seconds" }
