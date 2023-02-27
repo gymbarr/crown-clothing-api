@@ -31,3 +31,4 @@
 # Local project files.
 .env
 .vscode
+coverage

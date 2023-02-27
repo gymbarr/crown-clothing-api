@@ -71,4 +71,5 @@ group :test do
   gem 'rspec-benchmark', '~> 0.6.0'
   gem 'rspec-rails', '~> 6.0.1'
   gem 'rubocop-rspec', require: false
+  gem 'simplecov', require: false
 end
