@@ -3,9 +3,10 @@
 require 'benchmark'
 
 task measure_searching_performance: :environment do
+  arr = ('a'..'z').to_a.sample(10)
+
   pg_search_performance = Benchmark.measure do
-    10.times do
-      query = ('a'..'z').to_a.sample
+    arr.each do |query|
       results = PgSearch.multisearch(query)
       results.length
     end
@@ -14,8 +15,7 @@ task measure_searching_performance: :environment do
   puts "PG search completed the task in #{(pg_search_performance.real * 1000).to_i} miliseconds"
 
   elastic_search_performance = Benchmark.measure do
-    10.times do
-      query = ('a'..'z').to_a.sample
+    arr.each do |query|
       results = Searchkick.search(
         query,
         models: [Product, Category],
