@@ -12,6 +12,8 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :variants, dependent: :destroy
   has_one_attached :image
+  has_many :line_items, dependent: :destroy
+  has_many :orders, -> { distinct }, through: :line_items
 
   validates :title, presence: true, length: { minimum: TITLE_MIN_LENGTH, maximum: TITLE_MAX_LENGTH }
 
