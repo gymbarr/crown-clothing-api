@@ -14,6 +14,10 @@ module ActiveModelSerializers
       object.price
     end
 
+    attribute :availableQuantity do
+      object.quantity
+    end
+
     attribute :imageUrl do
       url_for object.image
     end
