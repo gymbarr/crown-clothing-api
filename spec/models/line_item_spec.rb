@@ -14,7 +14,7 @@ RSpec.describe LineItem, type: :model do
     context 'when invalid attributes' do
       subject(:line_item) { build(:line_item, **attrs) }
 
-      let(:attrs) { { order: nil, product: nil, quantity: nil } }
+      let(:attrs) { { order: nil, variant: nil, quantity: nil } }
 
       include_examples 'invalid object'
 
@@ -24,7 +24,7 @@ RSpec.describe LineItem, type: :model do
       end
 
       it_behaves_like 'with errors' do
-        let(:attr) { :product }
+        let(:attr) { :variant }
         let(:errors) { ['must exist'] }
       end
 
@@ -36,17 +36,17 @@ RSpec.describe LineItem, type: :model do
   end
 
   describe 'associations' do
-    subject(:line_item) { create(:line_item, order:, product:) }
+    subject(:line_item) { create(:line_item, order:, variant:) }
 
     let(:order) { create(:order) }
-    let(:product) { create(:product) }
+    let(:variant) { create(:variant) }
 
     it 'has an order' do
       expect(line_item.order).to eq(order)
     end
 
     it 'has a product' do
-      expect(line_item.product).to eq(product)
+      expect(line_item.variant).to eq(variant)
     end
   end
 end

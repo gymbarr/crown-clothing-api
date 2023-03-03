@@ -5,6 +5,6 @@ FactoryBot.define do
     quantity { rand(5) }
 
     association :order
-    association :product
+    association :variant
   end
 end

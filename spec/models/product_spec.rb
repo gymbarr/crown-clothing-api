@@ -26,22 +26,17 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'associations' do
-    subject(:product) { create(:product, category:, line_items:) }
+    subject(:product) { create(:product, category:, variants:) }
 
     let(:category) { create(:category) }
-    let(:line_items) { create_list(:line_item, 3, order:) }
-    let(:order) { create(:order) }
+    let(:variants) { create_list(:variant, 3) }
 
     it 'has category' do
       expect(product.category).to eq(category)
     end
 
-    it 'has line items' do
-      expect(product.line_items).to match_array(line_items)
-    end
-
-    it 'has orders' do
-      expect(product.orders).to contain_exactly(order)
+    it 'has variants' do
+      expect(product.variants).to eq(variants)
     end
   end
 end

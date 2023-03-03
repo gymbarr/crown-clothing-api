@@ -8,12 +8,14 @@ class OrdersController < ApplicationController
   def index
     authorize(@user, :index?)
 
-    render json: @user.orders
+    render json: Panko::Response.new(
+      Panko::ArraySerializer.new(@user.orders, each_serializer: PankoSerializers::OrderSerializer)
+    ), status: :ok
   end
 
   # GET /users/{username}/orders/{id}
   def show
-    render json: @order
+    render json: PankoSerializers::OrderSerializer.new.serialize(@order), status: :ok
   end
 
   def create; end
