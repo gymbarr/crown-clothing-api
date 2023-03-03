@@ -2,7 +2,12 @@
 
 Rails.application.routes.draw do
   scope '/api' do
-    resources :users, param: :_username
+    resources :users, param: :_username do
+      member do
+        resources :orders, only: %i[index show create]
+      end
+    end
+
     get '/user/me', to: 'users#me'
     post '/auth/login', to: 'authentication#login'
 

@@ -6,7 +6,9 @@ class User < ApplicationRecord
 
   after_create :assign_default_role
 
+  has_many :orders, dependent: :destroy
   has_secure_password
+
   validates :email, presence: true, uniqueness: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username, presence: true, uniqueness: true, format: { with: VALID_USERNAME_REGEX }
