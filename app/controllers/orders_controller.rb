@@ -18,7 +18,18 @@ class OrdersController < ApplicationController
     render json: PankoSerializers::OrderSerializer.new.serialize(@order), status: :ok
   end
 
-  def create; end
+  def create
+    order = @user.orders.build(status: 'unpaid')
+    order.build_line_items(params[:line_items])
+    if order.save
+      # does it need to reload?
+      order.reload
+      render json: PankoSerializers::OrderSerializer.new.serialize(order), status: :ok
+    else
+      render json: { errors: order.errors.full_messages },
+             status: :unprocessable_entity
+    end
+  end
 
   private
 
@@ -27,7 +38,7 @@ class OrdersController < ApplicationController
   end
 
   def find_order
-    @order = Order.find(params[:id])
+    @order = @user.orders.find(params[:id])
   end
 
   def authorize_order!
