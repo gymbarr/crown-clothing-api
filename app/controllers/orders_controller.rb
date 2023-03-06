@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
   def create
     order = @user.orders.build(status: 'unpaid')
     order.build_line_items(params[:line_items])
+
     if order.save
       # does it need to reload?
       order.reload
