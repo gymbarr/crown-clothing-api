@@ -20,6 +20,6 @@ class Order < ApplicationRecord
   end
 
   def set_total!
-    self.total = line_items.inject(0) { |total, line_item| total + (line_item.price * line_item.quantity) }
+    self.total = line_items.inject(0) { |total, item| total + (item.price * item.quantity) }
   end
 end

@@ -2,9 +2,19 @@
 
 FactoryBot.define do
   factory :order do
-    total { Faker::Commerce.price(range: 0..1000) }
+    total { 0 }
     status { Faker::Alphanumeric.alpha(number: 10) }
 
     association :user
+
+    trait :with_line_items do
+      transient do
+        line_items_count { 1 }
+      end
+
+      line_items do
+        create_list(:line_item, line_items_count)
+      end
+    end
   end
 end

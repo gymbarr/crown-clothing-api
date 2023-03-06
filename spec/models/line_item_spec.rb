@@ -49,4 +49,24 @@ RSpec.describe LineItem, type: :model do
       expect(line_item.variant).to eq(variant)
     end
   end
+
+  describe 'delegations' do
+    subject(:line_item) { create(:line_item, variant:) }
+
+    let(:variant) { create(:variant) }
+
+    it 'delegate a price to the variant' do
+      expect(line_item.price).to eq(variant.price)
+    end
+  end
+
+  describe '#decrement_variant_quantity' do
+    subject(:after_create_callback) { create(:line_item, variant:, quantity: 4) }
+
+    let(:variant) { create(:variant, quantity: 5) }
+
+    it 'decrements variant quantity by line item quantity' do
+      expect { after_create_callback }.to change(variant, :quantity).from(5).to(1)
+    end
+  end
 end

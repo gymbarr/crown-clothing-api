@@ -38,5 +38,9 @@ RSpec.describe Product, type: :model do
     it 'has variants' do
       expect(product.variants).to eq(variants)
     end
+
+    it 'has attached image' do
+      expect(product.image.attached?).to be true
+    end
   end
 end
