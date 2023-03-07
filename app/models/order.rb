@@ -1,6 +1,11 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  enum status: {
+    unpaid: 0,
+    paid: 1
+  }
+
   belongs_to :user
   has_many :line_items, dependent: :destroy
 

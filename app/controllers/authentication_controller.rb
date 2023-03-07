@@ -7,7 +7,7 @@ class AuthenticationController < ApplicationController
 
     @user = User.find_by(email: params[:email])
     if @user&.authenticate(params[:password])
-      token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
+      token = Authorizations::JsonWebTokenEncoder.call(user_id: @user.id)
       response.headers['token'] = token
 
       render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :ok

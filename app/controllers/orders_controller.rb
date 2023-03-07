@@ -18,8 +18,12 @@ class OrdersController < ApplicationController
     render json: PankoSerializers::OrderSerializer.new.serialize(@order), status: :ok
   end
 
+  # POST /users/{username}/orders
   def create
-    order = @user.orders.build(status: 'unpaid')
+    authorize(:order, :create?)
+
+    order = @user.orders.build
+    order.unpaid!
     order.build_line_items(params[:line_items])
 
     if order.save

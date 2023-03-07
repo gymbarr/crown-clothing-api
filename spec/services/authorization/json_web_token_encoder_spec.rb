@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Authorization::JsonWebTokenEncoder, type: :service do
+RSpec.describe Authorizations::JsonWebTokenEncoder, type: :service do
   describe '.call' do
     subject(:encoded) { described_class.call(user_id: user.id) }
 

@@ -16,11 +16,11 @@ module Authorizable
       return unless header
 
       begin
-        @decoded = Authorization::JsonWebTokenDecoder.call(header)
+        @decoded = Authorizations::JsonWebTokenDecoder.call(header)
         @current_user = User.find(@decoded[:user_id])
 
         # refresh token
-        token = Authorization::JsonWebTokenEncoder.call(user_id: @current_user.id)
+        token = Authorizations::JsonWebTokenEncoder.call(user_id: @current_user.id)
         response.headers['token'] = token
       rescue JWT::ExpiredSignature, JWT::DecodeError, ActiveRecord::RecordNotFound => e
         not_authenticated(e)
