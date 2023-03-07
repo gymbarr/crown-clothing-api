@@ -5,14 +5,16 @@ class ChargesController < ApplicationController
   def create
     authorize(:charge, :create?)
 
-    session = Stripe::Checkout::Session.create({
-                                                 customer_email: @current_user.email,
-                                                 payment_method_types: ['card'],
-                                                 line_items:,
-                                                 mode: 'payment',
-                                                 success_url: "#{params[:back_url]}?success=true",
-                                                 cancel_url: "#{params[:back_url]}?canceled=true"
-                                               })
+    session = Stripe::Checkout::Session.create(
+      {
+        customer_email: @current_user.email,
+        payment_method_types: ['card'],
+        line_items:,
+        mode: 'payment',
+        success_url: "#{params[:back_url]}?success=true",
+        cancel_url: "#{params[:back_url]}?canceled=true"
+      }
+    )
 
     render json: { session: session.url }, status: :created
   rescue Stripe => e

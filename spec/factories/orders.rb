@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :order do
     total { 0 }
-    status { Faker::Alphanumeric.alpha(number: 10) }
+    status { 'unpaid' }
 
     association :user
 

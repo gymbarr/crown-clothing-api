@@ -17,7 +17,6 @@ end
 shared_examples 'with errors' do
   it 'has errors' do
     subject.valid?
-    binding.pry
     expect(subject.errors[attr]).to eq(errors)
   end
 end

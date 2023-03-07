@@ -55,8 +55,24 @@ RSpec.describe LineItem, type: :model do
 
     let(:variant) { create(:variant) }
 
+    it 'delegate a title to the variant' do
+      expect(line_item.title).to eq(variant.title)
+    end
+
     it 'delegate a price to the variant' do
       expect(line_item.price).to eq(variant.price)
+    end
+
+    it 'delegate a color to the variant' do
+      expect(line_item.color).to eq(variant.color)
+    end
+
+    it 'delegate a size to the variant' do
+      expect(line_item.size).to eq(variant.size)
+    end
+
+    it 'delegate an image to the variant' do
+      expect(line_item.image).to eq(variant.image)
     end
   end
 
