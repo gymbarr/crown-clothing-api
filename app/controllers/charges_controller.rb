@@ -25,8 +25,8 @@ class ChargesController < ApplicationController
   private
 
   def line_items
-    purchases.map do |purchase|
-      variant = Variant.find(purchase['variant_id'])
+    requested_line_items.map do |requested_line_item|
+      variant = Variant.find(requested_line_item['variant_id'])
       product = variant.product
 
       {
@@ -38,12 +38,12 @@ class ChargesController < ApplicationController
             description: "Color: #{variant.color}, size: #{variant.size}"
           }
         },
-        quantity: purchase['quantity']
+        quantity: requested_line_item['quantity']
       }
     end
   end
 
-  def purchases
-    params.permit(purchases: %i[variant_id quantity])[:purchases]
+  def requested_line_items
+    params.permit(requested_line_items: %i[variant_id quantity])[:requested_line_items]
   end
 end

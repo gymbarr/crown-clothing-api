@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :find_user, except: %i[show]
+  before_action :find_user
+  before_action :find_order, only: %i[show]
   before_action :authorize_order!, only: %i[show]
 
   # GET /users/{username}/orders
