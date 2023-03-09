@@ -10,7 +10,7 @@ RSpec.describe 'Users', type: :request do
     end
 
     let(:token) { 'token' }
-    let(:service) { Authorization::JsonWebTokenEncoder }
+    let(:service) { Authorizations::JsonWebTokenEncoder }
 
     before do
       allow(service).to receive(:call).and_return(token)

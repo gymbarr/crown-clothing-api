@@ -131,7 +131,8 @@ performance = Benchmark.measure do
       colors.each do |color|
         sizes = random_items(PRODUCT_SIZES)
         sizes.each do |size|
-          variants << { color:, size: size.to_s, product_id: product.id, created_at: Time.zone.now,
+          quantity = rand(100)
+          variants << { color:, size: size.to_s, quantity:, product_id: product.id, created_at: Time.zone.now,
                         updated_at: Time.zone.now }
         end
       end

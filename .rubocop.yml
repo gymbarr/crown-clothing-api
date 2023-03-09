@@ -51,8 +51,8 @@ RSpec/Rails/InferredSpecType:
 RSpec/NestedGroups:
   Max: 4
 
-RSpec/MultipleExpectations:
-  Max: 2
+# RSpec/MultipleExpectations:
+#   Max: 2
 
 RSpec/MultipleMemoizedHelpers:
   Max: 6
@@ -60,5 +60,5 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/ExampleLength:
   Max: 9
 
-Metrics/AbcSize:
-  Max: 30
+# Metrics/AbcSize:
+#   Max: 30

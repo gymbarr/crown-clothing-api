@@ -45,5 +45,9 @@ RSpec.describe Category, type: :model do
     it 'has products' do
       expect(category.products).to match_array(products)
     end
+
+    it 'has attached image' do
+      expect(category.image.attached?).to be true
+    end
   end
 end

@@ -62,12 +62,17 @@ RSpec.describe User, type: :model do
   end
 
   describe 'associations' do
-    subject(:user) { create(:user, roles: [role]) }
+    subject(:user) { create(:user, roles: [role], orders:) }
 
     let(:role) { create(:role) }
+    let(:orders) { create_list(:order, 3) }
 
     it 'has roles' do
       expect(user.roles).to contain_exactly(role)
+    end
+
+    it 'has orders' do
+      expect(user.orders).to match_array(orders)
     end
   end
 end

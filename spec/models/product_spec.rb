@@ -6,7 +6,7 @@ require 'models/shared_examples/validation_spec'
 RSpec.describe Product, type: :model do
   describe 'validations' do
     context 'when valid attributes' do
-      subject(:product) { build(:category) }
+      subject(:product) { build(:product) }
 
       include_examples 'valid object'
     end
@@ -26,12 +26,21 @@ RSpec.describe Product, type: :model do
   end
 
   describe 'associations' do
-    subject(:product) { create(:product, category:) }
+    subject(:product) { create(:product, category:, variants:) }
 
     let(:category) { create(:category) }
+    let(:variants) { create_list(:variant, 3) }
 
     it 'has category' do
       expect(product.category).to eq(category)
+    end
+
+    it 'has variants' do
+      expect(product.variants).to eq(variants)
+    end
+
+    it 'has attached image' do
+      expect(product.image.attached?).to be true
     end
   end
 end

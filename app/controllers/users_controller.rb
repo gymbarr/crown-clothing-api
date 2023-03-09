@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
     @user = User.new(user_params)
     if @user.save
-      token = Authorization::JsonWebTokenEncoder.call(user_id: @user.id)
+      token = Authorizations::JsonWebTokenEncoder.call(user_id: @user.id)
       response.headers['token'] = token
 
       render json: PankoSerializers::UserSerializer.new.serialize(@user), status: :created

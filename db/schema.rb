@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_08_105117) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_094715) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_105117) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_categories_on_title", unique: true
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.bigint "order_id"
+    t.integer "quantity", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "variant_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["variant_id"], name: "index_line_items_on_variant_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "total", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "pg_search_documents", force: :cascade do |t|
@@ -103,12 +122,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_08_105117) do
     t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "quantity", default: 0, null: false
     t.index ["product_id"], name: "index_variants_on_product_id"
     t.index ["size", "color", "product_id"], name: "index_variants_on_size_and_color_and_product_id", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "variants"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "categories", on_delete: :cascade
   add_foreign_key "variants", "products", on_delete: :cascade
 end
