@@ -3,7 +3,8 @@
 class Order < ApplicationRecord
   enum status: {
     unpaid: 0,
-    paid: 1
+    paid: 1,
+    prepaid: 2
   }
 
   belongs_to :user
@@ -11,7 +12,7 @@ class Order < ApplicationRecord
 
   validates :total, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
-  validates_with EnoughVariantsValidator
+  validates_with EnoughVariantsValidator, if: :unpaid_or_prepaid
 
   before_validation :set_total!
 
@@ -26,5 +27,9 @@ class Order < ApplicationRecord
 
   def set_total!
     self.total = line_items.inject(0) { |total, item| total + (item.price * item.quantity) }
+  end
+
+  def unpaid_or_prepaid
+    unpaid? || prepaid?
   end
 end

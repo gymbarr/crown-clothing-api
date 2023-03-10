@@ -25,5 +25,6 @@ Rails.application.routes.draw do
     get '/elastic_search_results', to: 'elastic_search_results#index'
 
     post '/charges/create', to: 'charges#create'
+    post 'webhooks/create', to: 'webhooks#create'
   end
 end
