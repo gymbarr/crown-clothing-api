@@ -7,10 +7,16 @@ class ChargesController < ApplicationController
   def create
     authorize(:charge, :create?)
 
-    unless @order.prepaid!
-      render json: { errors: @order.errors.full_messages },
-             status: :bad_request
+    errors = []
+
+    @order.line_items.each do |line_item|
+      variant = line_item.variant
+      if line_item.quantity > variant.quantity
+        errors << "#{variant.title} is out of stock, just #{variant.quantity} left"
+      end
     end
+
+    return render json: { errors: }, status: :bad_request if errors
 
     session = Stripe::Checkout::Session.create(
       {
