@@ -16,7 +16,7 @@ class ChargesController < ApplicationController
       end
     end
 
-    return render json: { errors: }, status: :bad_request if errors
+    return render json: { errors: }, status: :bad_request if errors.present?
 
     session = Stripe::Checkout::Session.create(
       {
