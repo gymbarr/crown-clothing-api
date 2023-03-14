@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Authorizations::JsonWebTokenDecoder, type: :service do
+RSpec.describe Authentications::JsonWebTokenDecoder, type: :service do
   describe '.call' do
     subject(:decoded) { described_class.call(token) }
 
     let(:user) { create(:user) }
-    let(:token) { Authorizations::JsonWebTokenEncoder.call(user_id: user.id) }
+    let(:token) { Authentications::JsonWebTokenEncoder.call(user_id: user.id) }
 
     it 'returns a hash' do
       expect(decoded).to be_a(Hash)

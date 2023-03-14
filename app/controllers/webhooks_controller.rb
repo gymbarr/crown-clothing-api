@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class WebhooksController < ApplicationController
-  skip_before_action :authorize_request
+  skip_before_action :authenticate_request
   skip_after_action :verify_authorized
 
   def create
