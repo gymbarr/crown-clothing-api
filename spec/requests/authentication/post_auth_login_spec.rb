@@ -11,7 +11,7 @@ RSpec.describe 'Authentication', type: :request do
 
     let(:user) { create(:user) }
     let(:token) { 'token' }
-    let(:service) { Authorizations::JsonWebTokenEncoder }
+    let(:service) { Authentications::JsonWebTokenEncoder }
 
     before do
       allow(service).to receive(:call).and_return(token)

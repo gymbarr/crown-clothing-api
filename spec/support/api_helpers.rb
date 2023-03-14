@@ -6,6 +6,6 @@ module ApiHelpers
   end
 
   def user_auth_header(user)
-    { 'Authorization' => Authorizations::JsonWebTokenEncoder.call(user_id: user.id) }
+    { 'Authorization' => Authentications::JsonWebTokenEncoder.call(user_id: user.id) }
   end
 end
