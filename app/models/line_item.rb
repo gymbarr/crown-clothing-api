@@ -6,5 +6,5 @@ class LineItem < ApplicationRecord
 
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
-  delegate :title, :price, :color, :size, :image, to: :variant
+  delegate :title, :color, :size, :image, to: :variant
 end
