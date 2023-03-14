@@ -4,13 +4,14 @@ class OrdersController < ApplicationController
   before_action :find_user
   before_action :find_order, only: %i[show]
   before_action :authorize_order!, only: %i[show]
+  skip_after_action :verify_authorized, only: %i[index]
 
   # GET /users/{username}/orders
   def index
-    authorize(@user, :index?)
+    orders = policy_scope(Order, policy_scope_class: OrderPolicy::UserOrdersScope)
 
     render json: Panko::Response.new(
-      Panko::ArraySerializer.new(@user.orders, each_serializer: PankoSerializers::OrderSerializer)
+      Panko::ArraySerializer.new(orders, each_serializer: PankoSerializers::OrderSerializer)
     ), status: :ok
   end
 
