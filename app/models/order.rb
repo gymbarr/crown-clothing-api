@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   validates :status, presence: true
   validates_with EnoughVariantsValidator, if: -> { unpaid? }
 
-  before_update :set_line_items_prices!, :set_total!, if: -> { unpaid? || paid? }
+  before_validation :set_line_items_prices!, :set_total!, if: -> { unpaid? || paid? }
 
   def build_line_items(requested_items)
     requested_items.each do |requested_item|
