@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :variant do
-    size { Faker::Number.between(from: 30, to: 48) }
+    size { Faker::Number.between(from: 1, to: 1000) }
     color { Faker::Alphanumeric.unique.alpha(number: 10) }
     quantity { rand(50..100) }
 

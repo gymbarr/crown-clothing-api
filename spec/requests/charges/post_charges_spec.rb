@@ -10,28 +10,36 @@ RSpec.describe 'Charges', type: :request do
     end
 
     let(:user) { create(:user) }
+    let(:order) { create(:order, :with_line_items, line_items_count: 3) }
     let(:stripe_checkout) { Stripe::Checkout::Session }
-    # let(:session) { instance_double(Session) }
     let(:session) { double }
     let(:session_url) { 'session_url' }
-    let(:params) { { amount: '50', back_url: 'http://www.localhost:3001/checkout' } }
+    let(:params) { { order_id: order.id, back_url: 'http://www.localhost:3001/orders' } }
+
+    let(:stripe_line_items) do
+      order.line_items.map do |line_item|
+        {
+          price_data: {
+            currency: 'usd',
+            unit_amount: line_item.price * 100,
+            product_data: {
+              name: line_item.title,
+              description: "Color: #{line_item.color}, size: #{line_item.size}"
+            }
+          },
+          quantity: line_item.quantity
+        }
+      end
+    end
 
     before do
       allow(stripe_checkout).to receive(:create).with((
         {
           customer_email: user.email,
           payment_method_types: ['card'],
-          line_items: [{
-            price_data: {
-              currency: 'usd',
-              unit_amount: params[:amount],
-              product_data: {
-                name: 'Crown clothing'
-              }
-            },
-            quantity: 1
-          }],
+          line_items: stripe_line_items,
           mode: 'payment',
+          metadata: { order_id: order.id },
           success_url: "#{params[:back_url]}?success=true",
           cancel_url: "#{params[:back_url]}?canceled=true"
         }
