@@ -58,7 +58,7 @@ RSpec/MultipleMemoizedHelpers:
   Max: 6
 
 RSpec/ExampleLength:
-  Max: 9
+  Max: 15
 
 # Metrics/AbcSize:
 #   Max: 30
