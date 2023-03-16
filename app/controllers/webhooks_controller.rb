@@ -28,9 +28,8 @@ class WebhooksController < ApplicationController
           variant = line_item.variant
           variant.decrement(:quantity, line_item.quantity)
 
-          raise StandardError, variant.errors.full_messages unless variant.valid?
-
-          variant.save
+          # TODO: send email to a user if not enough quantity
+          variant.save!
         end
         order.paid!
         order.save!
