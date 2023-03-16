@@ -2,11 +2,7 @@
 
 Rails.application.routes.draw do
   scope '/api' do
-    resources :users, param: :_username do
-      member do
-        resources :orders, only: %i[index show create]
-      end
-    end
+    resources :users, param: :_username
 
     get '/user/me', to: 'users#me'
     post '/auth/login', to: 'authentication#login'
@@ -20,6 +16,8 @@ Rails.application.routes.draw do
         end
       end
     end
+
+    resources :orders, only: %i[index show create]
 
     get '/pg_search_results', to: 'pg_search_results#index'
     get '/elastic_search_results', to: 'elastic_search_results#index'

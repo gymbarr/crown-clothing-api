@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :find_user
   before_action :find_order, only: %i[show]
   before_action :authorize_order!, only: %i[show]
-  skip_after_action :verify_authorized, only: %i[index]
 
-  # GET /users/{username}/orders
+  # GET /orders
   def index
+    authorize(:order, :index?)
+
     orders = policy_scope(Order, policy_scope_class: OrderPolicy::UserOrdersScope)
 
     render json: Panko::Response.new(
@@ -15,16 +15,16 @@ class OrdersController < ApplicationController
     ), status: :ok
   end
 
-  # GET /users/{username}/orders/{id}
+  # GET /orders/{id}
   def show
     render json: PankoSerializers::OrderSerializer.new.serialize(@order), status: :ok
   end
 
-  # POST /users/{username}/orders
+  # POST /orders
   def create
     authorize(:order, :create?)
 
-    order = @user.orders.build
+    order = @current_user.orders.build
     order.unpaid!
     order.build_line_items(params[:line_items])
 
@@ -40,12 +40,8 @@ class OrdersController < ApplicationController
 
   private
 
-  def find_user
-    @user = User.find_by!(username: params[:_username])
-  end
-
   def find_order
-    @order = @user.orders.find(params[:id])
+    @order = Order.find(params[:id])
   end
 
   def authorize_order!
