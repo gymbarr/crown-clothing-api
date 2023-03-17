@@ -57,6 +57,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', '~> 3'
+  gem 'letter_opener'
   gem 'pry', '~> 0.13.1'
 end
 

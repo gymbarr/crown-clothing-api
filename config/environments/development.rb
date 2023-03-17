@@ -33,12 +33,30 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
-  Rails.application.routes.default_url_options = { host: 'localhost', port: '3000' }
+  Rails.application.routes.default_url_options = { host: ENV.fetch('HOST'), port: ENV.fetch('PORT') }
+
+  config.active_job.queue_adapter = :async
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
+
+  # config.action_mailer.delivery_method = ENV.fetch('ACTION_MAILER_DELIVERY_METHOD').to_sym
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST'), port: ENV.fetch('PORT') }
+
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch('SMTP_ADDRESS'),
+    port: ENV.fetch('SMTP_PORT'),
+    user_name: ENV.fetch('SMTP_USERNAME'),
+    password: ENV.fetch('SMTP_SECURED_PASSWORD'),
+    authentication: ENV.fetch('SMTP_AUTHENTICATION'),
+    enable_starttls_auto: true
+  }
+
+  config.action_mailer.preview_path = "#{Rails.root}/spec/mailers/previews"
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -56,6 +74,8 @@ Rails.application.configure do
   config.active_record.verbose_query_logs = true
 
   config.hosts << /[a-z0-9-.]+\.ngrok\.io/
+
+  config.active_job.queue_adapter = :async
 
 
   # Raises error for missing translations.

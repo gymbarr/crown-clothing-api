@@ -14,28 +14,42 @@ class WebhooksController < ApplicationController
         payload, sig_header, ENV.fetch('STRIPE_ENDPOINT_SECRET')
       )
     rescue JSON::ParserError, Stripe::SignatureVerificationError => e
-      render json: { message: e }, status: :bad_request
+      render json: { message: e.message }, status: :bad_request
       return
     end
 
     # Handle the event
     case event.type
     when 'checkout.session.completed'
-      ActiveRecord::Base.transaction do
-        session = event.data.object
-        order = Order.find_by(id: session.metadata.order_id)
-        order.line_items.each do |line_item|
-          variant = line_item.variant
-          variant.decrement(:quantity, line_item.quantity)
+      session = event.data.object
+      @order = Order.find_by(id: session.metadata.order_id)
 
-          # TODO: send email to a user if not enough quantity
-          variant.save!
+      begin
+        ActiveRecord::Base.transaction do
+          @order.line_items.each do |line_item|
+            variant = line_item.variant
+            variant.decrement(:quantity, line_item.quantity)
+            variant.save!
+          end
+          @order.paid!
         end
-        order.paid!
-        order.save!
+      rescue ActiveRecord::RecordInvalid => e
+        refund_order(e)
       end
     end
 
     render json: { message: 'success' }
+  end
+
+  private
+
+  def refund_order(exception)
+    @order.refund!
+
+    OrderMailer.with(variant: exception.record, user: @order.user)
+               .product_out_of_stock_after_payment_email
+               .deliver_later
+
+    render json: { message: exception.message }, status: :unprocessable_entity
   end
 end
