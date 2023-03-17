@@ -10,7 +10,9 @@ RSpec.describe 'Products', type: :request do
 
     let(:category) { create(:category) }
     let!(:product) { create(:product, category:) }
-    let!(:filtered_variants) { create_list(:variant, 3, color: 'some_color', product:) }
+    let!(:filtered_variants) do
+      create_list(:variant, 3, color: 'some_color', product:)
+    end
 
     before do
       create_list(:variant, 5, product:)

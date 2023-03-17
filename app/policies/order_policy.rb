@@ -8,22 +8,20 @@ class OrderPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    logged_in?
   end
 
   def index?
-    # admin? || same_user?
-    true
+    logged_in?
   end
 
   def show?
-    # admin? || same_user?
-    true
+    logged_in? && same_user?
   end
 
-  # private
+  private
 
-  # def same_user?
-  #   @user&.id == @record&.id
-  # end
+  def same_user?
+    @user&.id == @record.user.id
+  end
 end

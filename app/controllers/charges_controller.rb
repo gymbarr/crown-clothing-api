@@ -4,6 +4,7 @@ class ChargesController < ApplicationController
   before_action :find_order
 
   # rubocop:disable Metrics/MethodLength
+  # POST /charges/create
   def create
     authorize(:charge, :create?)
 
@@ -40,12 +41,10 @@ class ChargesController < ApplicationController
 
   def stripe_line_items
     @order.line_items.map do |line_item|
-      product = line_item.variant.product
-
       {
         price_data: {
           currency: 'usd',
-          unit_amount: product.price * 100,
+          unit_amount: line_item.price * 100,
           product_data: {
             name: line_item.title,
             description: "Color: #{line_item.color}, size: #{line_item.size}"
@@ -54,10 +53,6 @@ class ChargesController < ApplicationController
         quantity: line_item.quantity
       }
     end
-  end
-
-  def requested_line_items
-    params.permit(requested_line_items: %i[variant_id quantity])[:requested_line_items]
   end
 
   def find_order
