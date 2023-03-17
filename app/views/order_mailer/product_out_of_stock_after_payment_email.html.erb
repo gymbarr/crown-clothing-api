@@ -1,8 +1,6 @@
 <% product_url = "http://localhost:3001/shop/#{@variant.product.category.title}/products/#{@variant.product.id}" %>
 <h4><%= "Hello #{@user.username}" %><h4>
-
 <p><%= "Dear #{@user.username}, unfortunately the product #{@variant.title} (color: #{@variant.color}, size: #{@variant.size}) is out of stock:" %></p>
 <p><%= link_to(product_url, product_url) %></p>
 <p>So, the whole order was canceled. Our manager will contact you to discuss the refund</p>
-
-<p>Best regards, the administration of Crown Clothing shop</p> 
+<p>Best regards, the administration of Crown Clothing shop</p>

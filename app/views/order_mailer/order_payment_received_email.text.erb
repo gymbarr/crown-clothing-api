@@ -1,0 +1,7 @@
+<% user_orders_url = "http://localhost:3001/orders" %>
+<%= "Hello #{@user.username}" %>
+===============================================
+<%= "Dear #{@user.username}, we have received the payment for your order №#{@order.id}" %>
+You can monitor its status in your profile:
+<%= user_orders_url %>
+Best regards, the administration of Crown Clothing shop

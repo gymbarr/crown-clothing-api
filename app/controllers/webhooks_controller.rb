@@ -36,9 +36,13 @@ class WebhooksController < ApplicationController
       rescue ActiveRecord::RecordInvalid => e
         refund_order(e)
       end
+
+      OrderMailer.with(user: @order.user, order: @order)
+                 .order_payment_received_email
+                 .deliver_later
     end
 
-    render json: { message: 'success' }
+    render json: { message: 'success' }, status: :ok
   end
 
   private
@@ -46,7 +50,7 @@ class WebhooksController < ApplicationController
   def refund_order(exception)
     @order.refund!
 
-    OrderMailer.with(variant: exception.record, user: @order.user)
+    OrderMailer.with(user: @order.user, variant: exception.record)
                .product_out_of_stock_after_payment_email
                .deliver_later
 
