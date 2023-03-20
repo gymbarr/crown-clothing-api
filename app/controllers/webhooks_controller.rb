@@ -4,6 +4,7 @@ class WebhooksController < ApplicationController
   skip_before_action :authenticate_request
   skip_after_action :verify_authorized
 
+  # POST webhooks/create
   def create
     payload = request.body.read
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
@@ -34,7 +35,7 @@ class WebhooksController < ApplicationController
           @order.paid!
         end
       rescue ActiveRecord::RecordInvalid => e
-        refund_order(e)
+        refund_order(e) and return
       end
 
       OrderMailer.with(user: @order.user, order: @order)
@@ -48,7 +49,7 @@ class WebhooksController < ApplicationController
   private
 
   def refund_order(exception)
-    @order.refund!
+    @order.refunded!
 
     OrderMailer.with(user: @order.user, variant: exception.record)
                .product_out_of_stock_after_payment_email
