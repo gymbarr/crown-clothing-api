@@ -27,7 +27,8 @@ class ChargesController < ApplicationController
         mode: 'payment',
         metadata: { order_id: @order.id },
         success_url: "#{params[:back_url]}?success=true",
-        cancel_url: "#{params[:back_url]}?canceled=true"
+        cancel_url: "#{params[:back_url]}?canceled=true",
+        expires_at: Time.now.to_i + 3600
       }
     )
 

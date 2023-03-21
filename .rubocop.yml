@@ -60,5 +60,8 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/ExampleLength:
   Max: 15
 
+RSpec/MessageChain:
+  Enabled: false
+
 # Metrics/AbcSize:
 #   Max: 30

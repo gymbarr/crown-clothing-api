@@ -1,0 +1,6 @@
+<% user_orders_url = "http://localhost:3001/orders" %>
+<h4><%= "Hello #{@user.username}" %><h4>
+<p><%= "Dear #{@user.username}, we have received the payment for your order №#{@order.id}" %></p>
+<p>You can monitor its status in your profile:</p>
+<p><%= link_to(user_orders_url, user_orders_url) %></p>
+<p>Best regards, the administration of Crown Clothing shop</p> 

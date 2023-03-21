@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   enum status: {
     unpaid: 0,
     paid: 1,
-    completed: 2
+    refunded: 2
   }
 
   belongs_to :user
