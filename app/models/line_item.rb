@@ -7,4 +7,12 @@ class LineItem < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
 
   delegate :title, :color, :size, :image, to: :variant
+  delegate :user, to: :order
+
+  after_update :set_order_total!
+
+  def set_order_total!
+    order.set_total!
+    order.save
+  end
 end

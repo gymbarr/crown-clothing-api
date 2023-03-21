@@ -29,8 +29,6 @@ class OrdersController < ApplicationController
     order.build_line_items(params[:line_items])
 
     if order.save
-      # does it need to reload?
-      order.reload
       render json: PankoSerializers::OrderSerializer.new.serialize(order), status: :ok
     else
       render json: { errors: order.errors.full_messages },
