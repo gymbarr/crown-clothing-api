@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: %i[index show create]
+    resources :orders, only: %i[index show create destroy]
 
     resources :line_items, only: %i[destroy]
     post '/line_items/:id/decrement_quantity', to: 'line_items#decrement_quantity'

@@ -19,6 +19,10 @@ class OrderPolicy < ApplicationPolicy
     logged_in? && same_user?
   end
 
+  def destroy?
+    logged_in? && same_user?
+  end
+
   private
 
   def same_user?

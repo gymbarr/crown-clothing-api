@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  before_action :find_order, only: %i[show]
-  before_action :authorize_order!, only: %i[show]
+  before_action :find_order, only: %i[show destroy]
+  before_action :authorize_order!, only: %i[show destroy]
 
   # GET /orders
   def index
@@ -34,6 +34,11 @@ class OrdersController < ApplicationController
       render json: { errors: order.errors.full_messages },
              status: :unprocessable_entity
     end
+  end
+
+  # DELETE /orders/{id}
+  def destroy
+    @order.destroy
   end
 
   private
