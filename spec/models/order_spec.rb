@@ -27,7 +27,7 @@ RSpec.describe Order, type: :model do
 
       it_behaves_like 'with errors' do
         let(:attr) { :line_items }
-        let(:errors) { ["#{variant.title} is out of stock, just #{variant.quantity} left"] }
+        let(:errors) { ['is invalid', "#{variant.title} is out of stock, just #{variant.quantity} left"] }
       end
     end
   end
@@ -80,6 +80,17 @@ RSpec.describe Order, type: :model do
     it 'sets the order total price' do
       expect { order.save }.to change(order.line_items[0], :price).from(0).to(order.line_items[0].variant.price)
                            .and change(order.line_items[1], :price).from(0).to(order.line_items[1].variant.price)
+    end
+  end
+
+  describe '#line_items_sorted_by_created_at' do
+    subject(:order) { create(:order, line_items:) }
+
+    let(:line_items) { create_list(:line_item, 5) }
+    let(:line_items_sorted_by_created_at) { line_items.sort_by(&:created_at) }
+
+    it 'sets the order total price' do
+      expect(order.line_items_sorted_by_created_at).to eq(line_items_sorted_by_created_at)
     end
   end
 end

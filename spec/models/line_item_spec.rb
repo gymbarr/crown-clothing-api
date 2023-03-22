@@ -14,7 +14,8 @@ RSpec.describe LineItem, type: :model do
     context 'when invalid attributes' do
       subject(:line_item) { build(:line_item, **attrs) }
 
-      let(:attrs) { { order: nil, variant: nil, quantity: nil } }
+      let(:variant) { create(:variant, quantity: 0) }
+      let(:attrs) { { order: nil, variant:, quantity: 1 } }
 
       include_examples 'invalid object'
 
@@ -24,13 +25,8 @@ RSpec.describe LineItem, type: :model do
       end
 
       it_behaves_like 'with errors' do
-        let(:attr) { :variant }
-        let(:errors) { ['must exist'] }
-      end
-
-      it_behaves_like 'with errors' do
         let(:attr) { :quantity }
-        let(:errors) { ['can\'t be blank', 'is not a number'] }
+        let(:errors) { ["#{variant.title} is out of stock, just #{variant.quantity} left"] }
       end
     end
   end
@@ -51,8 +47,10 @@ RSpec.describe LineItem, type: :model do
   end
 
   describe 'delegations' do
-    subject(:line_item) { create(:line_item, variant:) }
+    subject(:line_item) { create(:line_item, order:, variant:) }
 
+    let(:user) { create(:user) }
+    let(:order) { create(:order, user:) }
     let(:variant) { create(:variant) }
 
     it 'delegate a title to the variant' do
@@ -69,6 +67,25 @@ RSpec.describe LineItem, type: :model do
 
     it 'delegate an image to the variant' do
       expect(line_item.image).to eq(variant.image)
+    end
+
+    it 'delegate the user to the order' do
+      expect(line_item.user).to eq(user)
+    end
+  end
+
+  describe '#set_order_total!' do
+    subject(:update_line_item) { line_item.update(quantity: new_quantity) }
+
+    let(:order) { create(:order, line_items: [line_item]) }
+    let(:line_item) { create(:line_item, quantity: old_quantity) }
+    let(:old_total) { line_item.variant.price * old_quantity }
+    let(:new_total) { line_item.variant.price * new_quantity }
+    let(:old_quantity) { 1 }
+    let(:new_quantity) { 2 }
+
+    it 'updates total price of the order' do
+      expect { update_line_item }.to change(order, :total).from(old_total).to(new_total)
     end
   end
 end
