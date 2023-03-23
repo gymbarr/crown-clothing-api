@@ -11,7 +11,7 @@ RSpec.describe OrderPolicy do
     context 'when the order belongs to the same user' do
       let(:order) { create(:order, user:) }
 
-      it { is_expected.to permit_actions(%i[index show create]) }
+      it { is_expected.to permit_actions(%i[index show create destroy]) }
     end
 
     context 'when the order belongs to other user' do
@@ -19,7 +19,7 @@ RSpec.describe OrderPolicy do
       let(:order) { create(:order, user: another_user) }
 
       it { is_expected.to permit_actions(%i[index create]) }
-      it { is_expected.to forbid_actions(%i[show]) }
+      it { is_expected.to forbid_actions(%i[show destroy]) }
     end
   end
 
@@ -28,6 +28,6 @@ RSpec.describe OrderPolicy do
 
     let(:order) { create(:order) }
 
-    it { is_expected.to forbid_actions(%i[index show create]) }
+    it { is_expected.to forbid_actions(%i[index show create destroy]) }
   end
 end

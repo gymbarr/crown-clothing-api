@@ -17,7 +17,8 @@ RSpec.describe PankoSerializers::OrderSerializer, type: :serializer do
         total: order.total,
         status: order.status,
         dateCreated: order.created_at.strftime('%e %B %Y'),
-        line_items: Panko::ArraySerializer.new(order.line_items, each_serializer: PankoSerializers::LineItemSerializer)
+        line_items: Panko::ArraySerializer.new(order.line_items.order(:created_at),
+                                               each_serializer: PankoSerializers::LineItemSerializer)
                                           .to_a
       )
     end

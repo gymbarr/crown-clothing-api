@@ -34,4 +34,8 @@ class Order < ApplicationRecord
   def set_total!
     self.total = line_items.inject(0) { |total, line_item| total + (line_item.price * line_item.quantity) }
   end
+
+  def line_items_sorted_by_created_at
+    line_items.order(:created_at)
+  end
 end

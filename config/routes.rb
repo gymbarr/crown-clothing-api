@@ -17,7 +17,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :orders, only: %i[index show create]
+    resources :orders, only: %i[index show create destroy]
+
+    resources :line_items, only: %i[destroy]
+    post '/line_items/:id/decrement_quantity', to: 'line_items#decrement_quantity'
+    post '/line_items/:id/increment_quantity', to: 'line_items#increment_quantity'
 
     get '/pg_search_results', to: 'pg_search_results#index'
     get '/elastic_search_results', to: 'elastic_search_results#index'
