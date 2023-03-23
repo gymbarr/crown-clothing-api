@@ -107,6 +107,7 @@ performance = Benchmark.measure do
     Product.insert_all(products)
   end
 
+  # rubocop:disable Metrics/MethodLength
   def attach_images_and_variants(category)
     category_images = case category.title
                       when 'hats'
@@ -140,6 +141,7 @@ performance = Benchmark.measure do
       Variant.insert_all(variants)
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   create_products(hats, 3000)
   attach_images_and_variants(hats)

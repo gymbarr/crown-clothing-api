@@ -7,10 +7,10 @@ RSpec.describe 'Orders', type: :request do
     subject(:get_orders_request) { get '/api/orders', headers: }
 
     let(:user) { create(:user) }
-    let!(:orders) { create_list(:order, 5, user:) }
     let(:headers) { user_auth_header(user) }
 
     before do
+      create_list(:order, 5, user:)
       get_orders_request
     end
 

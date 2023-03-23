@@ -52,6 +52,8 @@ gem 'stripe', '~> 8.1.0'
 
 group :development, :test do
   gem 'benchmark'
+  gem 'brakeman'
+  gem 'bundler-audit'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
@@ -59,6 +61,7 @@ group :development, :test do
   gem 'faker', '~> 3'
   gem 'letter_opener'
   gem 'pry', '~> 0.13.1'
+  gem 'ruby_audit'
 end
 
 group :development do

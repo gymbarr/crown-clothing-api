@@ -4,6 +4,7 @@ class WebhooksController < ApplicationController
   skip_before_action :authenticate_request
   skip_after_action :verify_authorized
 
+  # rubocop:disable Metrics/MethodLength
   # POST webhooks/create
   def create
     payload = request.body.read
@@ -45,6 +46,7 @@ class WebhooksController < ApplicationController
 
     render json: { message: 'success' }, status: :ok
   end
+  # rubocop:enable Metrics/MethodLength
 
   private
 

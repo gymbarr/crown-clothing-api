@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LineItemsController < ApplicationController
   before_action :find_line_item
   before_action :authorize_line_item!
