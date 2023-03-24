@@ -17,6 +17,7 @@ AllCops:
     - 'config/application.rb'
     - 'spec/spec_helper.rb'
     - 'Rakefile'
+    - 'vendor/bundle/**/*'
 
 Style/Documentation:
   Enabled: false
