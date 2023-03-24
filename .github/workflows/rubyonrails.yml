@@ -35,7 +35,9 @@ jobs:
       DB_USERNAME: postgres
       DB_PASSWORD: password
       DB_RAILS_MAX_THREADS: 5
+      DB_NAME_DEVELOPMENT: crown_clothing_db_development
       DB_NAME_TEST: crown_clothing_db_test
+      DB_NAME_PRODUCTION: crown_clothing_db_production
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
