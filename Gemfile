@@ -39,7 +39,7 @@ gem 'bootsnap', require: false
 gem 'rack-cors'
 
 gem 'active_model_serializers'
-gem 'elasticsearch'
+gem 'elasticsearch', '~> 7.17.7'
 gem 'jwt'
 gem 'oj'
 gem 'pagy', '~> 6.0'
