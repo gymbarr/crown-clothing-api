@@ -60,7 +60,7 @@ jobs:
       # Add or replace test runners here
       - name: Run tests
         run: |
-          bundle exec rspec specs/
+          bundle exec rspec spec/
       - uses: joshmfrankel/simplecov-check-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
