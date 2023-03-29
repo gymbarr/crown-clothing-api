@@ -18,6 +18,7 @@ AllCops:
     - 'spec/spec_helper.rb'
     - 'Rakefile'
     - 'vendor/bundle/**/*'
+    - Capfile
 
 Style/Documentation:
   Enabled: false
