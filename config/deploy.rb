@@ -4,8 +4,8 @@ lock "~> 3.17.2"
 set :application, "crwn-clothing-api"
 set :repo_url, "git@github.com:gymbarr/crown-clothing-api.git"
 
-# Default branch is :master
-# ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+# Default branch is :main
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/home/deploy/#{fetch :application}"

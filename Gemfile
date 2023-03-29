@@ -50,16 +50,13 @@ gem 'rolify'
 gem 'searchkick'
 gem 'stripe', '~> 8.1.0'
 
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-
 group :development, :test do
   gem 'benchmark'
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'capistrano', '~> 3.11'
-  gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-passenger', '~> 0.2.0'
+  gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
