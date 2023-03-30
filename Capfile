@@ -33,6 +33,7 @@ require "capistrano/passenger"
 
 set :rvm_type, :user
 set :rvm_ruby, '3.1.1'
+set :rvm_custom_path, "/usr/share/rvm"
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
