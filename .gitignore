@@ -30,5 +30,6 @@
 
 # Local project files.
 .env
+.env.production
 .vscode
 coverage
