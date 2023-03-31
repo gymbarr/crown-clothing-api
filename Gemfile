@@ -59,6 +59,7 @@ group :development, :test do
   gem 'capistrano-passenger', '~> 0.2.0'
   gem 'capistrano-rails', '~> 1.4'
   gem 'capistrano-rvm'
+  gem 'capistrano3-puma'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'

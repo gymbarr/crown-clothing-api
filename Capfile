@@ -30,6 +30,9 @@ require "capistrano/rvm"
 require "capistrano/bundler"
 require "capistrano/rails/migrations"
 require "capistrano/passenger"
+require 'capistrano/puma'
+install_plugin Capistrano::Puma  # Default puma tasks
+install_plugin Capistrano::Puma::Systemd
 
 set :rvm_type, :user
 set :rvm_ruby, '3.1.1'
