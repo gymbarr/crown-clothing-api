@@ -39,6 +39,7 @@ gem 'bootsnap', require: false
 gem 'rack-cors'
 
 gem 'active_model_serializers'
+gem 'dotenv-rails'
 gem 'elasticsearch', '~> 7.17.7'
 gem 'jwt'
 gem 'oj'
@@ -60,7 +61,6 @@ group :development, :test do
   gem 'capistrano-rvm'
   gem 'database_cleaner'
   gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', '~> 3'
   gem 'letter_opener'
