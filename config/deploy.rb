@@ -60,5 +60,7 @@ set :initial, true
 # run only if app is being deployed for the very first time, should update "set :initial, true" above to run this
 before 'deploy:migrate', 'database:create' if fetch(:initial)
 
+after 'database:create', 'database:seed'
+
 # reload application after successful deploy
 after 'deploy:publishing', 'application:reload'
