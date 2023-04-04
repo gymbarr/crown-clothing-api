@@ -55,7 +55,7 @@ before 'deploy:starting', 'config_files:upload'
 before 'deploy:starting', 'env_vars_file:upload'
 
 # set this to false after deploying for the first time 
-set :initial, false
+set :initial, true
 
 # run only if app is being deployed for the very first time, should update "set :initial, true" above to run this
 before 'deploy:migrate', 'database:create' if fetch(:initial)
