@@ -33,3 +33,4 @@
 .env.production
 .vscode
 coverage
+.ssl
