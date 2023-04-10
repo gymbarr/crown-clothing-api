@@ -75,9 +75,6 @@ Rails.application.configure do
 
   config.hosts << /[a-z0-9-.]+\.ngrok\.io/
 
-  config.active_job.queue_adapter = :async
-
-
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
 
