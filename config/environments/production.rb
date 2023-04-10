@@ -87,4 +87,17 @@ Rails.application.configure do
   Rails.application.routes.default_url_options = { host: ENV.fetch('HOST'), port: ENV.fetch('PORT') }
 
   config.active_job.queue_adapter = :async
+
+  config.action_mailer.delivery_method = ENV.fetch('ACTION_MAILER_DELIVERY_METHOD').to_sym
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = { host: ENV.fetch('HOST'), port: ENV.fetch('PORT') }
+
+  config.action_mailer.smtp_settings = {
+    address: ENV.fetch('SMTP_ADDRESS'),
+    port: ENV.fetch('SMTP_PORT'),
+    user_name: ENV.fetch('SMTP_USERNAME'),
+    password: ENV.fetch('SMTP_SECURED_PASSWORD'),
+    authentication: ENV.fetch('SMTP_AUTHENTICATION'),
+    enable_starttls_auto: true
+  }
 end
