@@ -1,4 +1,4 @@
-<% product_url = "http://localhost:3001/shop/#{@variant.product.category.title}/products/#{@variant.product.id}" %>
+<% product_url = "#{FRONTEND_HOST}/shop/#{@variant.product.category.title}/products/#{@variant.product.id}" %>
 <%= "Hello #{@user.username}" %>
 ===============================================
 <%= "Dear #{@user.username}, unfortunately the product #{@variant.title} (color: #{@variant.color}, size: #{@variant.size}) is out of stock:" %>
