@@ -1,4 +1,4 @@
-<% user_orders_url = "#{FRONTEND_HOST}:#{FRONTEND_PORT}/orders" %>
+<% user_orders_url = "#{ENV.fetch("FRONTEND_HOST")}:#{ENV.fetch("FRONTEND_PORT")}/orders" %>
 <%= "Hello #{@user.username}" %>
 ===============================================
 <%= "Dear #{@user.username}, we have received the payment for your order №#{@order.id}" %>

@@ -1,4 +1,4 @@
-<% product_url = "#{FRONTEND_HOST}/shop/#{@variant.product.category.title}/products/#{@variant.product.id}" %>
+<% product_url = "#{ENV.fetch("FRONTEND_HOST")}/shop/#{@variant.product.category.title}/products/#{@variant.product.id}" %>
 <h4><%= "Hello #{@user.username}" %><h4>
 <p><%= "Dear #{@user.username}, unfortunately the product #{@variant.title} (color: #{@variant.color}, size: #{@variant.size}) is out of stock:" %></p>
 <p><%= link_to(product_url, product_url) %></p>
