@@ -100,4 +100,6 @@ Rails.application.configure do
     authentication: ENV.fetch('SMTP_AUTHENTICATION'),
     enable_starttls_auto: true
   }
+
+  config.hosts << ENV.fetch('FRONTEND_URL')
 end
