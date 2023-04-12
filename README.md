@@ -1,6 +1,8 @@
 # Crown Clothing API
 > A backend part of an E-Commerce application "Crown Clothing Shop" that provides an API to its data
-> Frontend part of the "Crown Clothing Shop": [https://github.com/gymbarr/crown-clothing-client]
+
+> Frontend part of the "Crown Clothing Shop": https://github.com/gymbarr/crown-clothing-client
+
 > Live demo for the whole fullstack app [_here_](https://cosmic-sawine-9f1c88.netlify.app/).
 
 ## Table of Contents
@@ -138,7 +140,7 @@ So to test this functionality localy you can use [ngrok](https://ngrok.com) as a
 ## Sending Emails
 The application maintains notifications by email sending for some scenarios:
 - After successful payment of an order;
-- When payment was successfull but the product is out of stock.
+- When a payment was successfull but the product is out of stock.
 
 To turn on notifications by emails you need to configure SMTP settings as shown in the Configuration section for Action Mailer.
 
