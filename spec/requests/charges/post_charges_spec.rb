@@ -33,7 +33,7 @@ RSpec.describe 'Charges', type: :request do
     end
 
     before do
-      allow(stripe_checkout).to receive(:create).with((
+      allow(stripe_checkout).to receive(:create).with(
         {
           customer_email: user.email,
           payment_method_types: ['card'],
@@ -44,7 +44,7 @@ RSpec.describe 'Charges', type: :request do
           cancel_url: "#{params[:back_url]}?canceled=true",
           expires_at: Time.now.to_i + 3600
         }
-      )).and_return(session)
+      ).and_return(session)
       allow(session).to receive(:url).and_return(session_url)
       post_charges_request
     end
